@@ -27,11 +27,11 @@ const RouteConfig: React.FC = () => {
       <Routes>
       <Route
         path="/"
-        element={!isAuthenticated ? <LoginPage onLogin={handleLogin} /> : <Navigate to="/signup" />}
+        element={isAuthenticated ? <LoginPage onLogin={handleLogin} /> : <Navigate to="/signup" />}
       />
       <Route
         path="/signup"
-        element={!isAuthenticated ? <SignUpPage onSignup={handleSignup} /> : <Navigate to="/home" />}
+        element={isAuthenticated ? <SignUpPage onSignup={handleSignup} /> : <Navigate to="/home" />}
       />
       
       {/* Protected routes wrapped in Layout */}
