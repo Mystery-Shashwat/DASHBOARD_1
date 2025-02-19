@@ -57,7 +57,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
       // Simulate authentication API call
       await new Promise((resolve, reject) => {
         setTimeout(() => {
-          if (values.email === "user@example.com" && values.password === "password123") {
+          if (
+            values.email === "user@example.com" &&
+            values.password === "password123"
+          ) {
             resolve("Authenticated");
           } else {
             reject(new Error("Invalid email or password"));
@@ -88,11 +91,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         />
       </div>
 
-      <h2 className="text-2xl font-bold text-center text-[#E53E3E] mb-6">
+      <h2 className="text-2xl font-bold text-center text-textsecondary mb-6">
         Log in to Your Account
       </h2>
 
-      {authError && <p className="text-red-500 text-sm text-center mb-4">{authError}</p>}
+      {authError && (
+        <p className="text-texterror text-sm text-center mb-4">{authError}</p>
+      )}
 
       <Formik
         initialValues={{
@@ -100,20 +105,34 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           password: "",
         }}
         validationSchema={Yup.object({
-          email: Yup.string().email("Invalid email address").required("Email is required"),
-          password: Yup.string().min(8, "Password must be at least 8 characters").required("Password is required"),
+          email: Yup.string()
+            .email("Invalid email address")
+            .required("Email is required"),
+          password: Yup.string()
+            .min(8, "Password must be at least 8 characters")
+            .required("Password is required"),
         })}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
           <Form>
-            <MyTextInput label="Email" name="email" type="email" placeholder="yourname@example.com" />
-            <MyTextInput label="Password" name="password" type="password" placeholder="••••••••" />
+            <MyTextInput
+              label="Email"
+              name="email"
+              type="email"
+              placeholder="yourname@example.com"
+            />
+            <MyTextInput
+              label="Password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+            />
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-[#E53E3E] hover:bg-[#F56565] text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4"
+              className="w-full button text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4"
             >
               {isSubmitting ? "Logging In..." : "Log In"}
             </button>
@@ -121,13 +140,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
             <div className="flex justify-between items-center mt-4">
               <p className="text-gray-600 text-sm">
                 Don't have an account?{" "}
-                <Link to="/signup" className="text-[#E53E3E] hover:text-[#F56565] font-semibold">
+                <Link
+                  to="/signup"
+                  className="text-textsecondary hover:underline font-semibold"
+                >
                   Sign Up
                 </Link>
               </p>
               <Link
                 to="/forgot-password"
-                className="text-[#E53E3E] hover:text-[#F56565] text-sm font-semibold"
+                className="text-textsecondary hover:underline text-sm font-semibold"
               >
                 Forgot Password?
               </Link>

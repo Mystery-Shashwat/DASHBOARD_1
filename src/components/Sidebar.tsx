@@ -1,12 +1,12 @@
-import * as React from "react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import * as React from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 import {
   BarChart4,
   Users,
@@ -19,31 +19,28 @@ import {
   DollarSign,
   PieChart,
   type LucideIcon,
-} from "lucide-react"
+} from "lucide-react";
 
 interface NavItemProps {
-  icon: LucideIcon
-  title: string
-  isActive?: boolean
+  icon: LucideIcon;
+  title: string;
+  isActive?: boolean;
 }
 
 const NavItem = ({ icon: Icon, title, isActive }: NavItemProps) => (
   <Button
     variant="ghost"
-    className={cn(
-      "w-full justify-start gap-2",
-      isActive && "bg-muted"
-    )}
+    className={cn("w-full justify-start gap-2", isActive && "bg-muted")}
   >
     <Icon className="h-4 w-4" />
     <span>{title}</span>
   </Button>
-)
+);
 
 interface SidebarGroupProps {
-  icon: LucideIcon
-  title: string
-  items: string[]
+  icon: LucideIcon;
+  title: string;
+  items: string[];
 }
 
 const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => (
@@ -64,14 +61,14 @@ const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => (
       </div>
     </AccordionContent>
   </AccordionItem>
-)
+);
 
 export function Sidebar() {
   return (
     <div className="flex h-screen w-64 flex-col border-r bg-background p-4">
-      <div className="mb-8 px-2">
+      {/* <div className="mb-8 px-2">
         <h1 className="text-xl font-bold">FinTech CRM</h1>
-      </div>
+      </div> */}
 
       <nav className="flex-1">
         <div className="mb-2">
@@ -84,13 +81,13 @@ export function Sidebar() {
             title="Clients"
             items={["All Clients", "VIP Accounts", "Prospects"]}
           />
-          
+
           <SidebarGroup
             icon={Wallet}
             title="Transactions"
             items={["Recent", "Pending", "Reports"]}
           />
-          
+
           <SidebarGroup
             icon={DollarSign}
             title="Products"
@@ -111,7 +108,7 @@ export function Sidebar() {
         <NavItem icon={Settings} title="Settings" />
       </div>
     </div>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;

@@ -6,6 +6,18 @@
 
 @layer base {
   :root {
+    --bg-primary: #9b2c2c;
+    --bg-secondary: #c53030;
+
+    --text-primary: #ffffff;
+    --text-secondary: #9b2c2c;
+    --text-error: #ff2c2c;
+
+    --btn-primary: #9b2c2c;
+    --btn-hover: #c53030;
+
+
+   
 
     --background: 0 0% 100%;
 
@@ -55,8 +67,7 @@
 
     --chart-5: 27 87% 67%;
 
-    --radius: 0.5rem
-  ;
+    --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -72,9 +83,20 @@
 
     --sidebar-border: 220 13% 91%;
 
-    --sidebar-ring: 217.2 91.2% 59.8%}
-  .dark {
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
 
+  .button {
+    background-color: var(--btn-primary);
+    color: var(--text-primary);
+  }
+  
+  .button:hover {
+    background-color: var(--btn-hover);
+  }
+
+
+  .dark {
     --background: 0 0% 3.9%;
 
     --foreground: 0 0% 98%;
@@ -121,8 +143,7 @@
 
     --chart-4: 280 65% 60%;
 
-    --chart-5: 340 75% 55%
-  ;
+    --chart-5: 340 75% 55%;
 
     --sidebar-background: 240 5.9% 10%;
 
@@ -138,7 +159,8 @@
 
     --sidebar-border: 240 3.7% 15.9%;
 
-    --sidebar-ring: 217.2 91.2% 59.8%}
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
 }
 
 @layer base {
