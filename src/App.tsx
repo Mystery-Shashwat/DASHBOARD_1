@@ -1,14 +1,8 @@
-import { Button } from "@/components/ui/button"
-import './App.css'
+import React from "react";
+import RouteConfig from "./RouteConfig";
 
-function App() {
-  
+const App: React.FC = () => {
+  return <RouteConfig />;
+};
 
-  return (
-    <div>
-    <Button>Click me</Button>
-  </div>
-  )
-}
-
-export default App
+export default App;
