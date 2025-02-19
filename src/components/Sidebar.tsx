@@ -78,9 +78,27 @@ const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
 }
 
 export function Sidebar({ isOpen }: SidebarProps) {
-  if (isOpen == true) {
-    return null;
-  }
+  if (!isOpen) return null;
+  const location = useLocation();
+
+  const transactionItems = [
+    { name: "Recent", path: "/transactions/recent" },
+    { name: "Pending", path: "/transactions/pending" },
+    { name: "Reports", path: "/transactions/reports" }
+  ];
+
+  const clientItems = [
+    { name: "All Clients", path: "/clients/all" },
+    { name: "VIP Accounts", path: "/clients/vip" },
+    { name: "Prospects", path: "/clients/prospects" }
+  ];
+
+  const productItems = [
+    { name: "Investments", path: "/products/investments" },
+    { name: "Loans", path: "/products/loans" },
+    { name: "Insurance", path: "/products/insurance" }
+  ];
+
   return (
     <div className="flex h-screen w-64 flex-col border-r bg-background p-4">
       <nav className="flex-1">
