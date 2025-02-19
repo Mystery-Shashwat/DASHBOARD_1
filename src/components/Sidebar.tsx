@@ -63,7 +63,14 @@ const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => (
   </AccordionItem>
 );
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen: boolean;
+}
+
+export function Sidebar({ isOpen }: SidebarProps) {
+  if (isOpen == true) {
+    return null;
+  }
   return (
     <div className="flex h-screen w-64 flex-col border-r bg-background p-4">
       {/* <div className="mb-8 px-2">
