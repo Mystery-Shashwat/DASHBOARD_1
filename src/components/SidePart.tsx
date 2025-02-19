@@ -26,7 +26,7 @@ const features = [
 
 const SidePart: React.FC = () => {
   return (
-    <div className="w-full h-full bg-gradient-to-b from-backgroundprimary to-backgroundsecondary flex flex-col justify-center items-center gap-8 px-8 py-12">
+    <div className="w-full h-full bg-gradient-to-b from-[#9B2C2C] to-[#C53030] flex flex-col justify-center items-center gap-8 px-8 py-12">
       {features.map((feature, index) => (
         <div key={index} className="text-center space-y-2">
           {feature.icon}
