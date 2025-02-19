@@ -67,7 +67,7 @@ interface SidebarProps {
   isOpen: boolean;
 }
 
-export function Sidebar({ isOpen }: SidebarProps) {
+function Sidebar({ isOpen }: SidebarProps) {
   if (isOpen == true) {
     return null;
   }
