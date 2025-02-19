@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ setIsOpen }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center p-4 bg-white drop-shadow-xl">
+      <div className="flex w- justify-between items-center p-4 bg-white drop-shadow-xl">
         <div className="flex items-center space-x-4">
           <AlignJustify className="cursor-pointer text-black" onClick={handleClick} />
           <img src={logo} className="w-auto h-15" alt="Logo" />

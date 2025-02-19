@@ -66,6 +66,15 @@ const recentTransactions: Transaction[] = [
     type: "debit",
     recipient: "Unknown",
   },
+  {
+    id: "tx6",
+    date: "2025-01-17",
+    description: "Bonus",
+    amount: 75.00,
+    status: "completed",
+    type: "credit",
+    recipient: "Company",
+  },
 ];
 
 const Recent = () => {
@@ -85,7 +94,7 @@ const Recent = () => {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
     }).format(amount);
   };
 

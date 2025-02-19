@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import Recent from "@/pages/Recent";
+// import Recent from "@/pages/Recent";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -21,6 +21,7 @@ import {
   DollarSign,
   PieChart,
   type LucideIcon,
+  IndianRupee,
 } from "lucide-react";
 
 interface NavItemProps {
@@ -54,7 +55,7 @@ interface SidebarGroupProps {
 
 const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
   const navigate = useNavigate();
-  const location = useLocation();
+  
 
   return (
     <AccordionItem value={title} className="border-none">
@@ -125,7 +126,7 @@ export function Sidebar({ isOpen }: SidebarProps) {
           />
           
           <SidebarGroup
-            icon={DollarSign}
+            icon={IndianRupee}
             title="Products"
             items={productItems}
           />
