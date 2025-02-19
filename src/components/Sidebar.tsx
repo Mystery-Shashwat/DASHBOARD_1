@@ -1,8 +1,6 @@
-import { cn } from "@/lib/utils";
-import { useLocation, useNavigate } from "react-router-dom";
-
-import Recent from "@/pages/Recent";
-import { Button } from "@/components/ui/button";
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import {
   Accordion,
   AccordionContent,
@@ -27,80 +25,51 @@ interface NavItemProps {
   icon: LucideIcon
   title: string
   isActive?: boolean
-  to?:string
-}
-interface SidebarProps {
-  isOpen: boolean;
 }
 
 const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => (
   <Button
     variant="ghost"
-    className={cn(
-      "w-full justify-start gap-2",
-      isActive && "bg-muted"
-    )}
+    className={cn("w-full justify-start gap-2", isActive && "bg-muted")}
   >
     <Icon className="h-4 w-4" />
     <span>{title}</span>
   </Button>
-)
+);
 
 interface SidebarGroupProps {
   icon: LucideIcon
   title: string
-  items: Array<{ name: string; path: string }> 
+  items: string[]
 }
 
-const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => (
+  <AccordionItem value={title} className="border-none">
+    <AccordionTrigger className="py-2 hover:bg-muted rounded-lg px-2">
+      <div className="flex items-center gap-2">
+        <Icon className="h-4 w-4" />
+        <span>{title}</span>
+      </div>
+    </AccordionTrigger>
+    <AccordionContent className="pl-6 pt-1">
+      <div className="flex flex-col gap-1">
+        {items.map((item) => (
+          <Button key={item} variant="ghost" className="justify-start">
+            {item}
+          </Button>
+        ))}
+      </div>
+    </AccordionContent>
+  </AccordionItem>
+)
 
-  return (
-    <AccordionItem value={title} className="border-none">
-      <AccordionTrigger className="py-2 hover:bg-muted rounded-lg px-2">
-        <div className="flex items-center gap-2">
-          <Icon className="h-4 w-4" />
-          <span>{title}</span>
-        </div>
-      </AccordionTrigger>
-      <AccordionContent className="pl-6 pt-1">
-        <div className="flex flex-col gap-1">
-          {items.map((item) => (
-            <Button key={item.path} variant="ghost" className="justify-start" onClick={() => navigate(item.path)}>
-              {item.name}
-            </Button>
-          ))}
-        </div>
-      </AccordionContent>
-    </AccordionItem>
-  );
-}
-
-export function Sidebar({ isOpen }: SidebarProps) {
-  if (!isOpen) return null;
-  const location = useLocation();
-
-  const transactionItems = [
-    { name: "Recent", path: "/transactions/recent" },
-    { name: "Pending", path: "/transactions/pending" },
-    { name: "Reports", path: "/transactions/reports" }
-  ];
-
-  const clientItems = [
-    { name: "All Clients", path: "/clients/all" },
-    { name: "VIP Accounts", path: "/clients/vip" },
-    { name: "Prospects", path: "/clients/prospects" }
-  ];
-
-  const productItems = [
-    { name: "Investments", path: "/products/investments" },
-    { name: "Loans", path: "/products/loans" },
-    { name: "Insurance", path: "/products/insurance" }
-  ];
-
+export function Sidebar() {
   return (
     <div className="flex h-screen w-64 flex-col border-r bg-background p-4">
+      <div className="mb-8 px-2">
+        <h1 className="text-xl font-bold">FinTech CRM</h1>
+      </div>
+
       <nav className="flex-1">
         <div className="mb-2">
           <NavItem 
@@ -117,13 +86,13 @@ export function Sidebar({ isOpen }: SidebarProps) {
             title="Clients"
             items={clientItems}
           />
-          
+
           <SidebarGroup
             icon={Wallet}
             title="Transactions"
             items={transactionItems}
           />
-          
+
           <SidebarGroup
             icon={DollarSign}
             title="Products"
@@ -147,4 +116,4 @@ export function Sidebar({ isOpen }: SidebarProps) {
   );
 }
 
-export default Sidebar
+export default Sidebar;

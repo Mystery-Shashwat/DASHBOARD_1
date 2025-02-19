@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Castler_Logo from "../assets/images/Castler_Logo.png";
 
 interface SignUpFormProps {
-  onSignup?: () => void; 
+  onSignup?: () => void;
 }
 
 interface FormValues {
@@ -23,7 +23,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
     { setSubmitting, setFieldError }: any
   ) => {
     try {
-     
       const response = await fetch("https://mockapi.com/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -55,7 +54,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
         />
       </div>
 
-      <h2 className="text-2xl font-bold text-center text-[#E53E3E] mb-6">
+      <h2 className="text-2xl font-bold text-center text-textsecondary mb-6">
         Create an Account!
       </h2>
 
@@ -96,7 +95,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
               <ErrorMessage
                 name="name"
                 component="p"
-                className="text-red-500 text-xs mt-1"
+                className="text-texterror text-xs mt-1"
               />
             </div>
 
@@ -114,7 +113,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
               <ErrorMessage
                 name="email"
                 component="p"
-                className="text-red-500 text-xs mt-1"
+                className="text-texterror text-xs mt-1"
               />
             </div>
 
@@ -132,7 +131,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
               <ErrorMessage
                 name="password"
                 component="p"
-                className="text-red-500 text-xs mt-1"
+                className="text-texterror text-xs mt-1"
               />
             </div>
 
@@ -150,7 +149,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
               <ErrorMessage
                 name="confirmPassword"
                 component="p"
-                className="text-red-500 text-xs mt-1"
+                className="text-texterror text-xs mt-1"
               />
             </div>
 
@@ -158,7 +157,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-[#E53E3E] hover:bg-[#F56565] text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4"
+              className="w-full button text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4"
             >
               {isSubmitting ? "Signing Up..." : "Sign Up"}
             </button>
@@ -168,7 +167,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
               Already have an account?{" "}
               <Link
                 to="/"
-                className="text-[#E53E3E] hover:text-[#F56565] font-semibold"
+                className="text-textsecondary hover:underline font-semibold"
               >
                 Login
               </Link>
@@ -179,7 +178,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
 
       {/* Powered By Section */}
       <div className="flex flex-col items-center mt-6">
-        <p className="text-center text-[#E53E3E] text-sm">Powered By</p>
+        <p className="text-center text-textsecondary text-sm">Powered By</p>
         <img src={Castler_Logo} alt="Castler Logo" className="w-12 h-6 mt-2" />
       </div>
     </div>
