@@ -33,6 +33,19 @@ interface SidebarProps {
   isOpen: boolean;
 }
 
+<<<<<<< HEAD
+=======
+const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => (
+  <Button
+    variant="ghost"
+    className={cn("w-full justify-start gap-2", isActive && "bg-muted")}
+  >
+    <Icon className="h-4 w-4" />
+    <span>{title}</span>
+  </Button>
+);
+
+>>>>>>> d7d0a1354388cb451fec486609b8b2ca3220548a
 interface SidebarGroupProps {
   icon: LucideIcon;
   title: string;
@@ -41,6 +54,7 @@ interface SidebarGroupProps {
 
 const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => {
   const navigate = useNavigate();
+<<<<<<< HEAD
   
   return (
     <Button
@@ -61,6 +75,8 @@ const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => {
 const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+=======
+>>>>>>> d7d0a1354388cb451fec486609b8b2ca3220548a
 
   return (
     <AccordionItem value={title} className="border-none">
@@ -76,10 +92,14 @@ const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
             <Button
               key={item.path}
               variant="ghost"
+<<<<<<< HEAD
               className={cn(
                 "justify-start",
                 location.pathname === item.path && "bg-muted"
               )}
+=======
+              className="justify-start"
+>>>>>>> d7d0a1354388cb451fec486609b8b2ca3220548a
               onClick={() => navigate(item.path)}
             >
               {item.name}
@@ -100,19 +120,19 @@ export function Sidebar({ isOpen }: SidebarProps) {
   const transactionItems = [
     { name: "Recent", path: "/transactions/recent" },
     { name: "Pending", path: "/transactions/pending" },
-    { name: "Reports", path: "/transactions/reports" }
+    { name: "Reports", path: "/transactions/reports" },
   ];
 
   const clientItems = [
     { name: "All Clients", path: "/clients/all" },
     { name: "VIP Accounts", path: "/clients/vip" },
-    { name: "Prospects", path: "/clients/prospects" }
+    { name: "Prospects", path: "/clients/prospects" },
   ];
 
   const productItems = [
     { name: "Investments", path: "/products/investments" },
     { name: "Loans", path: "/products/loans" },
-    { name: "Insurance", path: "/products/insurance" }
+    { name: "Insurance", path: "/products/insurance" },
   ];
 
   // Individual navigation items
@@ -127,30 +147,34 @@ export function Sidebar({ isOpen }: SidebarProps) {
   ];
 
   return (
-    <div className="flex h-screen w-64 flex-col border-r bg-background p-4">
+    <div className="flex h-screen w-64 flex-col border-r bg-backgroundsecondary p-4 ">
       <nav className="flex-1">
         <div className="mb-2">
+<<<<<<< HEAD
           <NavItem 
             icon={BarChart4} 
             title="Dashboard" 
             isActive={location.pathname === "/dashboard"}
             to="/dashboard"
+=======
+          <NavItem
+            icon={BarChart4}
+            title="Dashboard"
+            isActive={location.pathname === "/home"}
+            to="/home"
+>>>>>>> d7d0a1354388cb451fec486609b8b2ca3220548a
           />
         </div>
 
         <Accordion type="multiple" className="space-y-2">
-          <SidebarGroup
-            icon={Users}
-            title="Clients"
-            items={clientItems}
-          />
-          
+          <SidebarGroup icon={Users} title="Clients" items={clientItems} />
+
           <SidebarGroup
             icon={Wallet}
             title="Transactions"
             items={transactionItems}
           />
-          
+
           <SidebarGroup
             icon={IndianRupee}
             title="Products"
@@ -183,4 +207,8 @@ export function Sidebar({ isOpen }: SidebarProps) {
   );
 }
 
+<<<<<<< HEAD
 export default Sidebar;
+=======
+export default Sidebar;
+>>>>>>> d7d0a1354388cb451fec486609b8b2ca3220548a

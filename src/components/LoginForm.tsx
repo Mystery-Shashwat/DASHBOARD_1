@@ -81,15 +81,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-md mx-auto flex flex-col justify-cente">
       {/* Logo centered at the top */}
-      <div className="flex justify-center mb-6">
+      {/* <div className="flex justify-center mb-6">
         <img
-          src="https://latestlogo.com/wp-content/uploads/2024/01/idfc-first-bank-logo.svg"
+          style={{ backgroundImage: "var(--logo-url)" }}
+          // src="https://latestlogo.com/wp-content/uploads/2024/01/idfc-first-bank-logo.svg"
           alt="Castler Logo"
           className="w-24 h-24"
         />
-      </div>
+      </div> */}
+      <div
+        className="w-32 h-10 bg-no-repeat bg-contain"
+        style={{ backgroundImage: "var(--logo-url)" }}
+      > </div>
 
       <h2 className="text-2xl font-bold text-center text-textsecondary mb-6">
         Log in to Your Account

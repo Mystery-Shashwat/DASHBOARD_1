@@ -1,5 +1,10 @@
 import React from "react";
-import { DashboardIcon, LockClosedIcon, ReloadIcon, GearIcon } from "@radix-ui/react-icons";
+import {
+  DashboardIcon,
+  LockClosedIcon,
+  ReloadIcon,
+  GearIcon,
+} from "@radix-ui/react-icons";
 
 const features = [
   {
@@ -10,7 +15,8 @@ const features = [
   {
     icon: <LockClosedIcon className="w-10 h-10 mx-auto text-white" />,
     title: "Secure Transactions",
-    description: "Multi-Factor Authentication (MFA) enabled for enhanced security.",
+    description:
+      "Multi-Factor Authentication (MFA) enabled for enhanced security.",
   },
   {
     icon: <ReloadIcon className="w-10 h-10 mx-auto text-white" />,
@@ -26,12 +32,16 @@ const features = [
 
 const SidePart: React.FC = () => {
   return (
-    <div className="w-full h-full bg-gradient-to-b from-[#9B2C2C] to-[#C53030] flex flex-col justify-center items-center gap-8 px-8 py-12">
+    <div className="w-full h-full bg-gradient-to-b from-backgroundprimary to-backgroundsecondary flex flex-col justify-center items-center gap-8 px-8 py-12">
       {features.map((feature, index) => (
         <div key={index} className="text-center space-y-2">
           {feature.icon}
-          <h1 className="text-2xl font-extrabold text-white">{feature.title}</h1>
-          <p className="text-base font-medium text-gray-200">{feature.description}</p>
+          <h1 className="text-2xl font-extrabold text-white">
+            {feature.title}
+          </h1>
+          <p className="text-base font-medium text-gray-200">
+            {feature.description}
+          </p>
         </div>
       ))}
     </div>
