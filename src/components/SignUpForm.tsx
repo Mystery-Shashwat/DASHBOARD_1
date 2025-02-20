@@ -45,20 +45,11 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      {/* Logo */}
-      {/* <div className="flex justify-center mb-6">
-        <img
-          src="https://latestlogo.com/wp-content/uploads/2024/01/idfc-first-bank-logo.svg"
-          alt="Castler Logo"
-          className="w-24 h-24"
-        />
-      </div> */}
-      <div
-        className="w-32 h-10 bg-no-repeat bg-contain"
-        style={{ backgroundImage: "var(--logo-url)" }}
-      >
-        {" "}
-      </div>
+       {/* Logo */}
+       <div className="flex justify-center mb-6">
+        <div className="w-32 h-10 bg-no-repeat bg-contain bg-center" style={{ backgroundImage: "var(--logo-url)" }} />
+        </div>
+     
 
       <h2 className="text-2xl font-bold text-center text-textsecondary mb-6">
         Create an Account!
