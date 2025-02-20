@@ -33,7 +33,8 @@ const Dashboard = () => {
     users: {
       active: 45000,
       new: 1200,
-      churn: 2.5
+      churn: 2.5,
+      growth:5
     }
   }
 
