@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "./Redux/themeSlice";
-import { RootState } from "./Redux/appStore"; 
+import { RootState } from "./Redux/appStore";
 import React from "react";
 
 const themes: string[] = ["idfc", "nubank"];
@@ -14,9 +14,17 @@ const ThemeDropdown: React.FC = () => {
   };
 
   return (
-    <select value={theme} onChange={handleThemeChange}>
+    <select
+      value={theme}
+      onChange={handleThemeChange}
+      className="bg-textsecondary outline-none cursor-pointer text-white p-2 rounded"
+    >
       {themes.map((themeName) => (
-        <option key={themeName} value={themeName}>
+        <option
+          key={themeName}
+          value={themeName}
+          className="bg-transparent text-inherit p-2"
+        >
           {themeName.charAt(0).toUpperCase() + themeName.slice(1)}
         </option>
       ))}
