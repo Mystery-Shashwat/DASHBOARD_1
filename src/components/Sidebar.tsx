@@ -44,7 +44,10 @@ const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => {
   return (
     <Button
       variant="ghost"
-      className={cn("w-full justify-start gap-2", isActive && "bg-muted")}
+      className={cn(
+        "w-full justify-start gap-2 text-white hover:text-black",
+        isActive && "bg-muted text-black"
+      )}
       onClick={() => to && navigate(to)}
     >
       <Icon className="h-4 w-4" />
@@ -52,13 +55,14 @@ const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => {
     </Button>
   );
 };
+
 const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   return (
     <AccordionItem value={title} className="border-none">
-      <AccordionTrigger className="py-2 hover:bg-muted hover:text-black rounded-lg px-2">
+      <AccordionTrigger className="py-2 text-white hover:bg-muted hover:text-black rounded-lg px-2">
         <div className="flex items-center gap-2">
           <Icon className="h-4 w-4" />
           <span>{title}</span>
@@ -71,10 +75,9 @@ const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
               key={item.path}
               variant="ghost"
               className={cn(
-                "justify-start",
-                location.pathname === item.path && "bg-muted"
+                "justify-start text-white hover:text-black",
+                location.pathname === item.path && "bg-muted text-black"
               )}
-              className="justify-start"
               onClick={() => navigate(item.path)}
             >
               {item.name}
@@ -90,7 +93,6 @@ export function Sidebar({ isOpen }: SidebarProps) {
   if (!isOpen) return null;
 
   const location = useLocation();
-  const navigate = useNavigate();
 
   const transactionItems = [
     { name: "Recent", path: "/transactions/recent" },
@@ -110,7 +112,6 @@ export function Sidebar({ isOpen }: SidebarProps) {
     { name: "Insurance", path: "/products/insurance" },
   ];
 
-  // Individual navigation items
   const navItems = [
     { icon: BarChart4, title: "Dashboard", path: "/dashboard" },
     { icon: PieChart, title: "Analytics", path: "/analytics" },
@@ -122,53 +123,44 @@ export function Sidebar({ isOpen }: SidebarProps) {
   ];
 
   return (
-    <div className="flex h-screen w-64 flex-col border-r bg-backgroundsidebar p-4 text-white  ">
-      <nav className="flex-1">
-        <div className="mb-2 hover:text-black">
-          <NavItem
-            icon={BarChart4}
-            title="Dashboard"
-            isActive={location.pathname === "/dashboard"}
-            to="/dashboard"
-          ></NavItem>
-        </div>
-
-        <Accordion type="multiple" className="space-y-2">
-          <SidebarGroup icon={Users} title="Clients" items={clientItems} />
-
-          <SidebarGroup
-            icon={Wallet}
-            title="Transactions"
-            items={transactionItems}
-          />
-
-          <SidebarGroup
-            icon={IndianRupee}
-            title="Products"
-            items={productItems}
-          />
-        </Accordion>
-
-        <div className="space-y-2 mt-2">
-          {navItems.slice(1, -1).map((item) => (
+    <div className="flex h-screen w-64 flex-col border-r bg-backgroundsidebar">
+      <div className="flex-1 overflow-y-auto">
+        <nav className="p-4 space-y-2">
+          <div className="mb-2">
             <NavItem
-              key={item.path}
-              icon={item.icon}
-              title={item.title}
-              isActive={location.pathname === item.path}
-              to={item.path}
+              icon={BarChart4}
+              title="Dashboard"
+              isActive={location.pathname === "/dashboard"}
+              to="/dashboard"
             />
-          ))}
-        </div>
-      </nav>
+          </div>
 
-      <div className="border-t pt-4">
-        <NavItem
-          icon={Settings}
-          title="Settings"
-          isActive={location.pathname === "/settings"}
-          to="/settings"
-        />
+          <Accordion type="multiple" className="space-y-2">
+            <SidebarGroup icon={Users} title="Clients" items={clientItems} />
+            <SidebarGroup
+              icon={Wallet}
+              title="Transactions"
+              items={transactionItems}
+            />
+            <SidebarGroup
+              icon={IndianRupee}
+              title="Products"
+              items={productItems}
+            />
+          </Accordion>
+
+          <div className="space-y-2">
+            {navItems.slice(1).map((item) => (
+              <NavItem
+                key={item.path}
+                icon={item.icon}
+                title={item.title}
+                isActive={location.pathname === item.path}
+                to={item.path}
+              />
+            ))}
+          </div>
+        </nav>
       </div>
     </div>
   );
