@@ -7,7 +7,7 @@
 @layer base {
   :root {
     --bg-primary: #9b2c2c;
-    --bg-secondary: #c53030;
+    --bg-secondary: pink;
 
     --text-primary: #ffffff;
     --text-secondary: #9b2c2c;
