@@ -171,14 +171,14 @@
     --bg-secondary: #5a189a;
 
     --text-primary: #ffffff;
-    --text-secondary: #7f00ff;
+    --text-secondary: #5a189a;
     --text-error: #5a189a;
-    --bg-sidebar: #7f00ff;
+    --bg-sidebar: #5a189a;
 
     --btn-primary: #7f00ff;
     --btn-hover: #5a189a;
 
-    --logo-url: url("./assets/images/Nu-Bank.jpg");
+    --logo-url: url("./assets/images/nubank-logo.svg");
 
     --background: 0 0% 100%;
 
@@ -246,16 +246,19 @@
 
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-  [data-theme="dark"] {
-    --bg-primary: yellow;
-    --bg-secondary: green;
+  [data-theme="rbl"] {
+    --bg-primary: #661833;
+    --bg-secondary: #5a189a;
 
     --text-primary: #ffffff;
-    --text-secondary: #9b2c2c;
-    --text-error: #ff2c2c;
+    --text-secondary: #370617;
+    --text-error: #370617;
+    --bg-sidebar: #370617;
 
-    --btn-primary: #9b2c2c;
-    --btn-hover: #c53030;
+    --btn-primary: #370617;
+    --btn-hover: #661833;
+
+    --logo-url: url("./assets/images/rbl.svg");
 
     --background: 0 0% 100%;
 

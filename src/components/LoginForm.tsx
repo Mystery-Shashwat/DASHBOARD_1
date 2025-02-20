@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form, useField, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import Castler_Logo from "../assets/images/cc.avif";
 
 interface MyTextInputProps {
   label: string;
@@ -91,10 +92,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           className="w-24 h-24"
         />
       </div> */}
-       {/* Logo */}
-       <div className="flex justify-center mb-6">
-        <div className="w-32 h-10 bg-no-repeat bg-contain bg-center" style={{ backgroundImage: "var(--logo-url)" }} />
-        </div>
+      {/* Logo */}
+      <div className="flex justify-center mb-6">
+        <div
+          className="w-32 h-10 bg-no-repeat bg-contain bg-center"
+          style={{ backgroundImage: "var(--logo-url)" }}
+        />
+      </div>
 
       <h2 className="text-2xl font-bold text-center text-textsecondary mb-6">
         Log in to Your Account
@@ -162,6 +166,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           </Form>
         )}
       </Formik>
+      <div className="flex flex-col items-center mt-6">
+        <p className="text-center text-textsecondary text-sm">Powered By</p>
+        <img
+          src={Castler_Logo}
+          alt="Castler Logo"
+          className="w-25 h-10 mt-2   "
+        />
+      </div>
     </div>
   );
 };

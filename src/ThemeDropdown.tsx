@@ -3,7 +3,7 @@ import { setTheme } from "./Redux/themeSlice";
 import { RootState } from "./Redux/appStore";
 import React from "react";
 
-const themes: string[] = ["idfc", "nubank"];
+const themes: string[] = ["idfc", "nubank","rbl"];
 
 const ThemeDropdown: React.FC = () => {
   const dispatch = useDispatch();

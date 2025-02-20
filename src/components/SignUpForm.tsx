@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate, Link } from "react-router-dom";
-import Castler_Logo from "../assets/images/Castler_Logo.png";
+import Castler_Logo from "../assets/images/cc.avif";
 
 interface SignUpFormProps {
   onSignup?: () => void;
@@ -45,11 +45,13 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
 
   return (
     <div className="w-full max-w-md mx-auto">
-       {/* Logo */}
-       <div className="flex justify-center mb-6">
-        <div className="w-32 h-10 bg-no-repeat bg-contain bg-center" style={{ backgroundImage: "var(--logo-url)" }} />
-        </div>
-     
+      {/* Logo */}
+      <div className="flex justify-center mb-6">
+        <div
+          className="w-32 h-10 bg-no-repeat bg-contain bg-center"
+          style={{ backgroundImage: "var(--logo-url)" }}
+        />
+      </div>
 
       <h2 className="text-2xl font-bold text-center text-textsecondary mb-6">
         Create an Account!
@@ -176,7 +178,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
       {/* Powered By Section */}
       <div className="flex flex-col items-center mt-6">
         <p className="text-center text-textsecondary text-sm">Powered By</p>
-        <img src={Castler_Logo} alt="Castler Logo" className="w-12 h-6 mt-2" />
+        <img src={Castler_Logo} alt="Castler Logo" className="w-25 h-10 mt-2   " />
       </div>
     </div>
   );
