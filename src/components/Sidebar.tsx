@@ -1,7 +1,5 @@
 import { cn } from "@/lib/utils";
 import { useLocation, useNavigate } from "react-router-dom";
-
-// import Recent from "@/pages/Recent";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -18,7 +16,7 @@ import {
   MessageSquare,
   Bell,
   FileText,
-  DollarSign,
+ 
   PieChart,
   type LucideIcon,
   IndianRupee,
@@ -30,19 +28,12 @@ interface NavItemProps {
   isActive?: boolean;
   to?: string;
 }
+
 interface SidebarProps {
   isOpen: boolean;
 }
 
-const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => (
-  <Button
-    variant="ghost"
-    className={cn("w-full justify-start gap-2", isActive && "bg-muted")}
-  >
-    <Icon className="h-4 w-4" />
-    <span>{title}</span>
-  </Button>
-);
+
 
 interface SidebarGroupProps {
   icon: LucideIcon;
@@ -50,8 +41,26 @@ interface SidebarGroupProps {
   items: Array<{ name: string; path: string }>;
 }
 
+const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => {
+  const navigate = useNavigate();
+  
+  return (
+    <Button
+      variant="ghost"
+      className={cn(
+        "w-full justify-start gap-2",
+        isActive && "bg-muted"
+      )}
+      onClick={() => to && navigate(to)}
+    >
+      <Icon className="h-4 w-4" />
+      <span>{title}</span>
+    </Button>
+  );
+};
 const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <AccordionItem value={title} className="border-none">
@@ -67,6 +76,10 @@ const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
             <Button
               key={item.path}
               variant="ghost"
+              className={cn(
+                "justify-start",
+                location.pathname === item.path && "bg-muted"
+              )}
               className="justify-start"
               onClick={() => navigate(item.path)}
             >
@@ -81,7 +94,9 @@ const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
 
 export function Sidebar({ isOpen }: SidebarProps) {
   if (!isOpen) return null;
+  
   const location = useLocation();
+  const navigate = useNavigate();
 
   const transactionItems = [
     { name: "Recent", path: "/transactions/recent" },
@@ -101,16 +116,27 @@ export function Sidebar({ isOpen }: SidebarProps) {
     { name: "Insurance", path: "/products/insurance" },
   ];
 
+  // Individual navigation items
+  const navItems = [
+    { icon: BarChart4, title: "Dashboard", path: "/dashboard" },
+    { icon: PieChart, title: "Analytics", path: "/analytics" },
+    { icon: Clock, title: "History", path: "/history" },
+    { icon: MessageSquare, title: "Messages", path: "/messages" },
+    { icon: Bell, title: "Notifications", path: "/notifications" },
+    { icon: FileText, title: "Documents", path: "/documents" },
+    { icon: Settings, title: "Settings", path: "/settings" },
+  ];
+
   return (
     <div className="flex h-screen w-64 flex-col border-r bg-backgroundsecondary p-4 ">
       <nav className="flex-1">
         <div className="mb-2">
-          <NavItem
-            icon={BarChart4}
-            title="Dashboard"
-            isActive={location.pathname === "/home"}
-            to="/home"
-          />
+          <NavItem 
+            icon={BarChart4} 
+            title="Dashboard" 
+            isActive={location.pathname === "/dashboard"}
+            to="/dashboard"></NavItem>
+          
         </div>
 
         <Accordion type="multiple" className="space-y-2">
@@ -130,16 +156,25 @@ export function Sidebar({ isOpen }: SidebarProps) {
         </Accordion>
 
         <div className="space-y-2 mt-2">
-          <NavItem icon={PieChart} title="Analytics" to="/analytics" />
-          <NavItem icon={Clock} title="History" to="/history" />
-          <NavItem icon={MessageSquare} title="Messages" to="/messages" />
-          <NavItem icon={Bell} title="Notifications" to="/notifications" />
-          <NavItem icon={FileText} title="Documents" to="/documents" />
+          {navItems.slice(1, -1).map((item) => (
+            <NavItem
+              key={item.path}
+              icon={item.icon}
+              title={item.title}
+              isActive={location.pathname === item.path}
+              to={item.path}
+            />
+          ))}
         </div>
       </nav>
 
       <div className="border-t pt-4">
-        <NavItem icon={Settings} title="Settings" to="/settings" />
+        <NavItem
+          icon={Settings}
+          title="Settings"
+          isActive={location.pathname === "/settings"}
+          to="/settings"
+        />
       </div>
     </div>
   );
