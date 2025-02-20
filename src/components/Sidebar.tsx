@@ -16,7 +16,6 @@ import {
   MessageSquare,
   Bell,
   FileText,
- 
   PieChart,
   type LucideIcon,
   IndianRupee,
@@ -33,8 +32,6 @@ interface SidebarProps {
   isOpen: boolean;
 }
 
-
-
 interface SidebarGroupProps {
   icon: LucideIcon;
   title: string;
@@ -43,14 +40,11 @@ interface SidebarGroupProps {
 
 const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => {
   const navigate = useNavigate();
-  
+
   return (
     <Button
       variant="ghost"
-      className={cn(
-        "w-full justify-start gap-2",
-        isActive && "bg-muted"
-      )}
+      className={cn("w-full justify-start gap-2", isActive && "bg-muted")}
       onClick={() => to && navigate(to)}
     >
       <Icon className="h-4 w-4" />
@@ -64,7 +58,7 @@ const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
 
   return (
     <AccordionItem value={title} className="border-none">
-      <AccordionTrigger className="py-2 hover:bg-muted rounded-lg px-2">
+      <AccordionTrigger className="py-2 hover:bg-muted hover:text-black rounded-lg px-2">
         <div className="flex items-center gap-2">
           <Icon className="h-4 w-4" />
           <span>{title}</span>
@@ -94,7 +88,7 @@ const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
 
 export function Sidebar({ isOpen }: SidebarProps) {
   if (!isOpen) return null;
-  
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -128,15 +122,15 @@ export function Sidebar({ isOpen }: SidebarProps) {
   ];
 
   return (
-    <div className="flex h-screen w-64 flex-col border-r bg-backgroundsecondary p-4 ">
+    <div className="flex h-screen w-64 flex-col border-r bg-backgroundsidebar p-4 text-white  ">
       <nav className="flex-1">
-        <div className="mb-2">
-          <NavItem 
-            icon={BarChart4} 
-            title="Dashboard" 
+        <div className="mb-2 hover:text-black">
+          <NavItem
+            icon={BarChart4}
+            title="Dashboard"
             isActive={location.pathname === "/dashboard"}
-            to="/dashboard"></NavItem>
-          
+            to="/dashboard"
+          ></NavItem>
         </div>
 
         <Accordion type="multiple" className="space-y-2">

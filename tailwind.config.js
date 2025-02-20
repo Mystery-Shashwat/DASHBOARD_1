@@ -15,7 +15,9 @@ module.exports = {
         texterror: "var(--text-error)",
         backgroundprimary: "var(--bg-primary)",
         backgroundsecondary: "var(--bg-secondary)",
+        backgroundsidebar: "var(--bg-sidebar)",
         background: "hsl(var(--background))",
+
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",

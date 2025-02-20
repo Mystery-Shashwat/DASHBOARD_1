@@ -88,6 +88,7 @@
   [data-theme="idfc"] {
     --bg-primary: #9b2c2c;
     --bg-secondary: #c53030;
+    --bg-sidebar: #c53030;
 
     --text-primary: #ffffff;
     --text-secondary: #9b2c2c;
@@ -172,6 +173,7 @@
     --text-primary: #ffffff;
     --text-secondary: #7f00ff;
     --text-error: #5a189a;
+    --bg-sidebar: #7f00ff;
 
     --btn-primary: #7f00ff;
     --btn-hover: #5a189a;
