@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import Recent from "./pages/Recent";
+import Dashboard from "./pages/Dashboard";
 
 const RouteConfig: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
@@ -39,6 +40,7 @@ const RouteConfig: React.FC = () => {
         element={isAuthenticated ? <Layout /> : <Navigate to="/" />}
       >
         <Route path="/home" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/transactions">
           <Route path="recent" element={<Recent />} />
           <Route path="pending" element={<div>Pending Transactions</div>} />
