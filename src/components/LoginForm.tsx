@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Formik, Form, useField, FormikHelpers } from "formik";
 import * as Yup from "yup";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Castler_Logo from "../assets/images/cc.avif";
-
+import toast from "react-hot-toast";
 
 interface MyTextInputProps {
   label: string;
@@ -54,9 +54,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   //   values: LoginFormValues,
   //   { setSubmitting }: FormikHelpers<LoginFormValues>
   // ) => {
-  //   setAuthError(null); 
+  //   setAuthError(null);
   //   try {
-      
+
   //     await new Promise((resolve, reject) => {
   //       setTimeout(() => {
   //         if (
@@ -69,24 +69,28 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   //         }
   //       }, 1000);
   //     });
+
+  const handleClick = () => {
+    console.log("Clicking ....");
+  };
+
   const handleSubmit = async (
     values: LoginFormValues,
     { setSubmitting, setFieldError }: any
   ) => {
     try {
-      const response =true;
+      const response = true;
       if (!response) {
         throw new Error("Login failed. Please try again.");
       }
 
-      
       localStorage.setItem("isAuthenticated", "true");
 
-
-     
-      if(onLogin)onLogin();
+      toast.success("Successfully Logged In!");
       navigate("/home");
     } catch (error) {
+      toast.error("This didn't work.");
+
       setAuthError("Invalid email or password. Please try again.");
     } finally {
       setSubmitting(false);
@@ -153,7 +157,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full button text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4"
+              className="w-full button text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4 "
+              onClick={() => {
+                handleClick();
+              }}
             >
               {isSubmitting ? "Logging In..." : "Log In"}
             </button>

@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate, Link } from "react-router-dom";
 import Castler_Logo from "../assets/images/cc.avif";
-
+import toast from "react-hot-toast";
 interface SignUpFormProps {
   onSignup?: () => void;
 }
@@ -23,7 +23,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
     { setSubmitting, setFieldError }: any
   ) => {
     try {
-      const response =true;
+      const response = true;
       // const response = await fetch("https://mockapi.com/signup", {
       //   method: "POST",
       //   headers: { "Content-Type": "application/json" },
@@ -34,9 +34,10 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
         throw new Error("Signup failed. Please try again.");
       }
 
-     
-      if (onSignup) onSignup();
-      navigate("/home");
+      if (onSignup) {
+        toast.success("Successfully Logged In!");
+        navigate("/home");
+      }
     } catch (error: any) {
       setFieldError("email", error.message || "Registration failed.");
     } finally {
@@ -179,7 +180,11 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
       {/* Powered By Section */}
       <div className="flex flex-col items-center mt-6">
         <p className="text-center text-textsecondary text-sm">Powered By</p>
-        <img src={Castler_Logo} alt="Castler Logo" className="w-25 h-10 mt-2   " />
+        <img
+          src={Castler_Logo}
+          alt="Castler Logo"
+          className="w-25 h-10 mt-2   "
+        />
       </div>
     </div>
   );
