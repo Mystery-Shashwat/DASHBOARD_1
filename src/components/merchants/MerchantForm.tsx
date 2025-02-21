@@ -180,7 +180,7 @@ const MerchantForm = () => {
       if (!formData.employmentStatus) newErrors.employmentStatus = "Employment status is required"
       if (!formData.investmentExperience) newErrors.investmentExperience = "Investment experience is required"
       if (!formData.riskTolerance) newErrors.riskTolerance = "Risk tolerance is required"
-      if (!formData.acceptedTerms) newErrors.acceptedTerms = "You must accept the terms and conditions"
+     
     }
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -200,7 +200,9 @@ const MerchantForm = () => {
     e.preventDefault()
     if (currentStep === 3 && validateStep()) {
       console.log("Form submitted:", formData)
-      // Add submission logic here
+    // Add submission logic here
+    alert("Form submitted successfully!");
+    
     }
   }
 
@@ -213,7 +215,7 @@ const MerchantForm = () => {
     pdf.text("Merchant Application Form", 105, yPos, { align: "center" })
     yPos += 20
 
-    // Helper function to add a section to the PDF
+    
     const addSection = (title: string, data: Record<string, string | boolean>) => {
       pdf.setFontSize(16)
       pdf.text(title, 10, yPos)
@@ -262,10 +264,10 @@ const MerchantForm = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 h-screen overflow-y-auto">
-      <div ref={formRef} className="max-h-full overflow-y-auto pb-8">
+    <div className="container mx-auto px-4 py-8 h-screen -auto">
+      <div ref={formRef} className="max-h-full auto pb-8">
         <form onSubmit={handleSubmit}>
-          <Card className="w-full max-w-4xl mx-auto">
+          <Card className="w-full max-w-4xl mx-auto"> 
             <CardHeader>
               <CardTitle className="text-center text-2xl">
                 {steps.find((step) => step.number === currentStep)?.title}
