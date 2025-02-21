@@ -199,17 +199,12 @@ const MerchantForm = () => {
       if (!formData.idType) newErrors.idType = "ID type is required";
       if (!formData.idNumber) newErrors.idNumber = "ID number is required";
     } else if (currentStep === 2) {
-      if (!formData.income) newErrors.income = "Income range is required";
-      if (!formData.sourceOfFunds)
-        newErrors.sourceOfFunds = "Source of funds is required";
-      if (!formData.employmentStatus)
-        newErrors.employmentStatus = "Employment status is required";
-      if (!formData.investmentExperience)
-        newErrors.investmentExperience = "Investment experience is required";
-      if (!formData.riskTolerance)
-        newErrors.riskTolerance = "Risk tolerance is required";
-      if (!formData.acceptedTerms)
-        newErrors.acceptedTerms = "You must accept the terms and conditions";
+      if (!formData.income) newErrors.income = "Income range is required"
+      if (!formData.sourceOfFunds) newErrors.sourceOfFunds = "Source of funds is required"
+      if (!formData.employmentStatus) newErrors.employmentStatus = "Employment status is required"
+      if (!formData.investmentExperience) newErrors.investmentExperience = "Investment experience is required"
+      if (!formData.riskTolerance) newErrors.riskTolerance = "Risk tolerance is required"
+      if (!formData.acceptedTerms) newErrors.acceptedTerms = "You must accept the terms and conditions"
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -228,7 +223,7 @@ const MerchantForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (currentStep === 3 && validateStep()) {
-      console.log("Form submitted:", formData);
+      console.log("Form submitted:", formData)
       // Add submission logic here
     }
   };
@@ -243,14 +238,11 @@ const MerchantForm = () => {
     yPos += 20;
 
     // Helper function to add a section to the PDF
-    const addSection = (
-      title: string,
-      data: Record<string, string | boolean>
-    ) => {
-      pdf.setFontSize(16);
-      pdf.text(title, 10, yPos);
-      yPos += 10;
-      pdf.setFontSize(12);
+    const addSection = (title: string, data: Record<string, string | boolean>) => {
+      pdf.setFontSize(16)
+      pdf.text(title, 10, yPos)
+      yPos += 10
+      pdf.setFontSize(12)
       Object.entries(data).forEach(([key, value]) => {
         pdf.text(`${key}: ${value}`, 20, yPos);
         yPos += 7;
@@ -296,10 +288,10 @@ const MerchantForm = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 h-screen ">
-      <div ref={formRef} className="max-h-full  pb-8">
+    <div className="container mx-auto px-4 py-8 h-screen overflow-y-auto">
+      <div ref={formRef} className="max-h-full overflow-y-auto pb-8">
         <form onSubmit={handleSubmit}>
-          <Card className="w-full max-w-4xl mx-auto">
+          <Card className="w-full max-w-4xl mx-auto"> 
             <CardHeader>
               <CardTitle className="text-center text-2xl">
                 {steps.find((step) => step.number === currentStep)?.title}

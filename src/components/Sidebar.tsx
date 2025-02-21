@@ -130,8 +130,9 @@ export function Sidebar({ isOpen }: SidebarProps) {
   const clientItems = [
     { name: "All Users", path: "/clients/all" },
     { name: "Merchant Form", path: "/clients/form" },
-    
   ];
+
+  
 
   const productItems = [
     { name: "Investments", path: "/products/investments" },
