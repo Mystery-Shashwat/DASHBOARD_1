@@ -10,17 +10,23 @@ const Layout: React.FC = () => {
   const [isSupport, setIsSupport] = useState<boolean>(false);
 
   return (
-    <div className="h-screen flex flex-col">
+    
+    <div className="min-h-screen max-h-screen flex flex-col overflow-hidden">
       {/* Navbar */}
+      <div className="z-50">
       <Navbar setIsOpen={setIsOpen} />
+      </div>
+
 
       {/* Sidebar + Content */}
-      <div className="flex flex-1 h-full overflow-hidden">
+      <div className="flex flex-1 overflow-hidden">
         <Sidebar isOpen={isOpen} />
 
         {/* Main Content Area */}
-        <main className="flex-1 p-4 overflow-y-auto scrollbar-hidden bg-gray-100">
-          <Outlet />
+        <main className="flex-1 p-4 overflow-y-auto bg-gray-100 relative">
+          <div className="h-full">
+            <Outlet />
+          </div>
 
           {/* Support Icon & Chatbot */}
           <div className="fixed bottom-5 right-5 z-50">
