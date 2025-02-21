@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Formik, Form, useField, FormikHelpers } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import Castler_Logo from "../assets/images/cc.avif";
+
 
 interface MyTextInputProps {
   label: string;
@@ -42,38 +43,49 @@ interface LoginFormValues {
 }
 
 interface LoginFormProps {
-  onLogin: () => void; // Accept onLogin prop
+  onLogin: () => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
+  const navigate = useNavigate();
   const [authError, setAuthError] = useState<string | null>(null);
 
+  // const handleSubmit = async (
+  //   values: LoginFormValues,
+  //   { setSubmitting }: FormikHelpers<LoginFormValues>
+  // ) => {
+  //   setAuthError(null); 
+  //   try {
+      
+  //     await new Promise((resolve, reject) => {
+  //       setTimeout(() => {
+  //         if (
+  //           values.email === "user@example.com" &&
+  //           values.password === "password123"
+  //         ) {
+  //           resolve("Authenticated");
+  //         } else {
+  //           reject(new Error("Invalid email or password"));
+  //         }
+  //       }, 1000);
+  //     });
   const handleSubmit = async (
     values: LoginFormValues,
-    { setSubmitting }: FormikHelpers<LoginFormValues>
+    { setSubmitting, setFieldError }: any
   ) => {
-    setAuthError(null); // Reset error message
-
     try {
-      // Simulate authentication API call
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          if (
-            values.email === "user@example.com" &&
-            values.password === "password123"
-          ) {
-            resolve("Authenticated");
-          } else {
-            reject(new Error("Invalid email or password"));
-          }
-        }, 1000);
-      });
+      const response =true;
+      if (!response) {
+        throw new Error("Login failed. Please try again.");
+      }
 
-      // Save authentication status in localStorage
+      
       localStorage.setItem("isAuthenticated", "true");
 
-      // Call onLogin() instead of navigate("/home")
-      onLogin();
+
+     
+      if(onLogin)onLogin();
+      navigate("/home");
     } catch (error) {
       setAuthError("Invalid email or password. Please try again.");
     } finally {

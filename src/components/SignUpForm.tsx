@@ -23,17 +23,18 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
     { setSubmitting, setFieldError }: any
   ) => {
     try {
-      const response = await fetch("https://mockapi.com/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
+      const response =true;
+      // const response = await fetch("https://mockapi.com/signup", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(values),
+      // });
 
-      if (!response.ok) {
+      if (!response) {
         throw new Error("Signup failed. Please try again.");
       }
 
-      // If signup is successful, trigger callback and navigate
+     
       if (onSignup) onSignup();
       navigate("/home");
     } catch (error: any) {

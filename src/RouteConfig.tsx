@@ -3,7 +3,6 @@ import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 // import LoginForm from "./components/LoginForm";
 // import SignUpForm from "./components/SignUpForm";
 import Layout from "./Layout";
-import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import Recent from "./pages/Recent";
@@ -34,12 +33,11 @@ const RouteConfig: React.FC = () => {
         path="/signup"
         element={isAuthenticated ? <SignUpPage onSignup={handleSignup} /> : <Navigate to="/home" />}
       />
-      
-      {/* Protected routes wrapped in Layout */}
+
       <Route
         element={isAuthenticated ? <Layout /> : <Navigate to="/" />}
       >
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/transactions">
           <Route path="recent" element={<Recent />} />
