@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,8 @@ interface SidebarGroupProps {
   icon: LucideIcon;
   title: string;
   items: Array<{ name: string; path: string }>;
+  openAccordion: string | null;
+  setOpenAccordion: (title: string | null) => void;
 }
 
 const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => {
@@ -56,26 +59,49 @@ const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => {
   );
 };
 
-const SidebarGroup = ({ icon: Icon, title, items }: SidebarGroupProps) => {
+const SidebarGroup = ({
+  icon: Icon,
+  title,
+  items,
+  openAccordion,
+  setOpenAccordion,
+}: SidebarGroupProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Function to toggle the accordion
+  const handleToggle = () => {
+    setOpenAccordion(openAccordion === title ? null : title);
+  };
+
   return (
     <AccordionItem value={title} className="border-none">
-      <AccordionTrigger className="py-2 text-white hover:bg-muted hover:text-black rounded-lg px-2">
+      <AccordionTrigger
+        className="py-2 text-white hover:bg-muted hover:text-black rounded-lg px-2"
+        onClick={handleToggle}
+      >
         <div className="flex items-center gap-2">
           <Icon className="h-4 w-4" />
           <span>{title}</span>
         </div>
       </AccordionTrigger>
-      <AccordionContent className="pl-6 pt-1">
+
+      {/* Smooth transition effect for accordion content */}
+      <AccordionContent
+        className={cn(
+          "pl-6 pt-1 transition-all duration-300 ease-in-out",
+          openAccordion === title
+            ? "max-h-screen opacity-100"
+            : "max-h-0 opacity-0"
+        )}
+      >
         <div className="flex flex-col gap-1">
           {items.map((item) => (
             <Button
               key={item.path}
               variant="ghost"
               className={cn(
-                "justify-start text-white hover:text-black",
+                "justify-start text-white hover:text-black transition-all duration-300",
                 location.pathname === item.path && "bg-muted text-black"
               )}
               onClick={() => navigate(item.path)}
@@ -93,6 +119,7 @@ export function Sidebar({ isOpen }: SidebarProps) {
   if (!isOpen) return null;
 
   const location = useLocation();
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null); // 👈 Manages open section
 
   const transactionItems = [
     { name: "Recent", path: "/transactions/recent" },
@@ -135,17 +162,28 @@ export function Sidebar({ isOpen }: SidebarProps) {
             />
           </div>
 
-          <Accordion type="multiple" className="space-y-2">
-            <SidebarGroup icon={Users} title="Clients" items={clientItems} />
+          {/* Controlled Accordion */}
+          <Accordion type="single" collapsible className="space-y-2">
+            <SidebarGroup
+              icon={Users}
+              title="Clients"
+              items={clientItems}
+              openAccordion={openAccordion}
+              setOpenAccordion={setOpenAccordion}
+            />
             <SidebarGroup
               icon={Wallet}
               title="Transactions"
               items={transactionItems}
+              openAccordion={openAccordion}
+              setOpenAccordion={setOpenAccordion}
             />
             <SidebarGroup
               icon={IndianRupee}
               title="Products"
               items={productItems}
+              openAccordion={openAccordion}
+              setOpenAccordion={setOpenAccordion}
             />
           </Accordion>
 
