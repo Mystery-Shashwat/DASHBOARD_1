@@ -123,16 +123,14 @@ export function Sidebar({ isOpen }: SidebarProps) {
 
   const transactionItems = [
     { name: "Recent", path: "/transactions/recent" },
-    { name: "Pending", path: "/transactions/pending" },
+    // { name: "Pending", path: "/transactions/pending" },
     { name: "Reports", path: "/transactions/reports" },
   ];
 
   const clientItems = [
-    { name: "All Users", path: "/clients/all" },
-    { name: "Merchant Form", path: "/clients/form" },
+    { name: "All Merchants", path: "/clients/all" },
+    { name: "Add Merchant", path: "/clients/form" },
   ];
-
-  
 
   const productItems = [
     { name: "Investments", path: "/products/investments" },
@@ -179,13 +177,13 @@ export function Sidebar({ isOpen }: SidebarProps) {
               openAccordion={openAccordion}
               setOpenAccordion={setOpenAccordion}
             />
-            <SidebarGroup
+            {/* <SidebarGroup
               icon={IndianRupee}
               title="Products"
               items={productItems}
               openAccordion={openAccordion}
               setOpenAccordion={setOpenAccordion}
-            />
+            /> */}
           </Accordion>
 
           <div className="space-y-2">

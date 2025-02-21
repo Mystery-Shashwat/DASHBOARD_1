@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import type React from "react"
 import { useState, useRef } from "react"
@@ -9,31 +9,30 @@ import { Download, ArrowLeft, ArrowRight } from "lucide-react"
 import PersonalDetailsStep from "./PersonalDetails"
 import FinancialProfileStep from "./FinancialProfile"
 import jsPDF from "jspdf"
-import toast from "react-hot-toast";
 
 export interface FormData {
-  fullName: string
-  dateOfBirth: string
-  email: string
-  phone: string
-  nationality: string
-  address: string
-  city: string
-  postalCode: string
-  idType: string
-  idNumber: string
-  income: string
-  sourceOfFunds: string
-  employmentStatus: string
-  employerName: string
-  investmentExperience: string
-  riskTolerance: string
-  isPoliticallyExposed: boolean
-  acceptedTerms: boolean
+  fullName: string;
+  dateOfBirth: string;
+  email: string;
+  phone: string;
+  nationality: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  idType: string;
+  idNumber: string;
+  income: string;
+  sourceOfFunds: string;
+  employmentStatus: string;
+  employerName: string;
+  investmentExperience: string;
+  riskTolerance: string;
+  isPoliticallyExposed: boolean;
+  acceptedTerms: boolean;
 }
 
 const MerchantForm = () => {
-  const [currentStep, setCurrentStep] = useState(1)
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     dateOfBirth: "",
@@ -53,20 +52,20 @@ const MerchantForm = () => {
     riskTolerance: "",
     isPoliticallyExposed: false,
     acceptedTerms: false,
-  })
-  const [errors, setErrors] = useState<Partial<FormData>>({})
-  const formRef = useRef<HTMLDivElement>(null)
+  });
+  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const formRef = useRef<HTMLDivElement>(null);
 
   const steps = [
     { number: 1, title: "Personal Details" },
     { number: 2, title: "Financial Profile" },
     { number: 3, title: "Review & Submit" },
-  ]
+  ];
 
   const updateFormData = (field: keyof FormData, value: any) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-    setErrors((prev) => ({ ...prev, [field]: undefined }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
 
   const renderStepIndicator = () => (
     <div className="flex justify-center mb-8">
@@ -74,18 +73,24 @@ const MerchantForm = () => {
         <div key={step.number} className="flex items-center">
           <div
             className={`flex items-center justify-center w-10 h-10 rounded-full ${
-              currentStep >= step.number ? "bg-primary text-primary-foreground" : "bg-muted"
+              currentStep >= step.number
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted"
             }`}
           >
             {step.number}
           </div>
           {index < steps.length - 1 && (
-            <div className={`w-20 h-1 mx-2 ${currentStep > step.number ? "bg-primary" : "bg-muted"}`} />
+            <div
+              className={`w-20 h-1 mx-2 ${
+                currentStep > step.number ? "bg-primary" : "bg-muted"
+              }`}
+            />
           )}
         </div>
       ))}
     </div>
-  )
+  );
 
   const renderReview = () => (
     <div className="space-y-6">
@@ -96,7 +101,8 @@ const MerchantForm = () => {
             <span className="font-medium">Full Name:</span> {formData.fullName}
           </p>
           <p>
-            <span className="font-medium">Date of Birth:</span> {formData.dateOfBirth}
+            <span className="font-medium">Date of Birth:</span>{" "}
+            {formData.dateOfBirth}
           </p>
           <p>
             <span className="font-medium">Email:</span> {formData.email}
@@ -111,10 +117,12 @@ const MerchantForm = () => {
             <span className="font-medium">City:</span> {formData.city}
           </p>
           <p>
-            <span className="font-medium">Postal Code:</span> {formData.postalCode}
+            <span className="font-medium">Postal Code:</span>{" "}
+            {formData.postalCode}
           </p>
           <p>
-            <span className="font-medium">Nationality:</span> {formData.nationality}
+            <span className="font-medium">Nationality:</span>{" "}
+            {formData.nationality}
           </p>
           <p>
             <span className="font-medium">ID Type:</span> {formData.idType}
@@ -132,19 +140,24 @@ const MerchantForm = () => {
             <span className="font-medium">Income Range:</span> {formData.income}
           </p>
           <p>
-            <span className="font-medium">Source of Funds:</span> {formData.sourceOfFunds}
+            <span className="font-medium">Source of Funds:</span>{" "}
+            {formData.sourceOfFunds}
           </p>
           <p>
-            <span className="font-medium">Employment Status:</span> {formData.employmentStatus}
+            <span className="font-medium">Employment Status:</span>{" "}
+            {formData.employmentStatus}
           </p>
           <p>
-            <span className="font-medium">Employer:</span> {formData.employerName}
+            <span className="font-medium">Employer:</span>{" "}
+            {formData.employerName}
           </p>
           <p>
-            <span className="font-medium">Investment Experience:</span> {formData.investmentExperience}
+            <span className="font-medium">Investment Experience:</span>{" "}
+            {formData.investmentExperience}
           </p>
           <p>
-            <span className="font-medium">Risk Tolerance:</span> {formData.riskTolerance}
+            <span className="font-medium">Risk Tolerance:</span>{" "}
+            {formData.riskTolerance}
           </p>
         </div>
       </div>
@@ -156,82 +169,94 @@ const MerchantForm = () => {
           {formData.isPoliticallyExposed ? "Yes" : "No"}
         </p>
         <p>
-          <span className="font-medium">Terms Accepted:</span> {formData.acceptedTerms ? "Yes" : "No"}
+          <span className="font-medium">Terms Accepted:</span>{" "}
+          {formData.acceptedTerms ? "Yes" : "No"}
         </p>
       </div>
     </div>
-  )
+  );
 
   const validateStep = () => {
-    const newErrors: Partial<FormData> = {}
+    const newErrors: Partial<FormData> = {};
     if (currentStep === 1) {
-      if (!formData.fullName) newErrors.fullName = "Full name is required"
-      if (!formData.dateOfBirth) newErrors.dateOfBirth = "Date of birth is required"
-      if (!formData.email) newErrors.email = "Email is required"
-      if (!formData.phone) newErrors.phone = "Phone number is required"
-      if (!formData.address) newErrors.address = "Address is required"
-      if (!formData.city) newErrors.city = "City is required"
-      if (!formData.postalCode) newErrors.postalCode = "Postal code is required"
-      if (!formData.nationality) newErrors.nationality = "Nationality is required"
-      if (!formData.idType) newErrors.idType = "ID type is required"
-      if (!formData.idNumber) newErrors.idNumber = "ID number is required"
+      if (!formData.fullName) newErrors.fullName = "Full name is required";
+      if (!formData.dateOfBirth)
+        newErrors.dateOfBirth = "Date of birth is required";
+      if (!formData.email) newErrors.email = "Email is required";
+      if (!formData.phone) newErrors.phone = "Phone number is required";
+      if (!formData.address) newErrors.address = "Address is required";
+      if (!formData.city) newErrors.city = "City is required";
+      if (!formData.postalCode)
+        newErrors.postalCode = "Postal code is required";
+      if (!formData.nationality)
+        newErrors.nationality = "Nationality is required";
+      if (!formData.idType) newErrors.idType = "ID type is required";
+      if (!formData.idNumber) newErrors.idNumber = "ID number is required";
     } else if (currentStep === 2) {
-      if (!formData.income) newErrors.income = "Income range is required"
-      if (!formData.sourceOfFunds) newErrors.sourceOfFunds = "Source of funds is required"
-      if (!formData.employmentStatus) newErrors.employmentStatus = "Employment status is required"
-      if (!formData.investmentExperience) newErrors.investmentExperience = "Investment experience is required"
-      if (!formData.riskTolerance) newErrors.riskTolerance = "Risk tolerance is required"
-     
+      if (!formData.income) newErrors.income = "Income range is required";
+      if (!formData.sourceOfFunds)
+        newErrors.sourceOfFunds = "Source of funds is required";
+      if (!formData.employmentStatus)
+        newErrors.employmentStatus = "Employment status is required";
+      if (!formData.investmentExperience)
+        newErrors.investmentExperience = "Investment experience is required";
+      if (!formData.riskTolerance)
+        newErrors.riskTolerance = "Risk tolerance is required";
+      if (!formData.acceptedTerms)
+        newErrors.acceptedTerms = "You must accept the terms and conditions";
     }
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleNext = () => {
     if (validateStep()) {
-      setCurrentStep((prev) => prev + 1)
+      setCurrentStep((prev) => prev + 1);
     }
-  }
+  };
 
   const handleBack = () => {
-    setCurrentStep((prev) => prev - 1)
-  }
+    setCurrentStep((prev) => prev - 1);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (currentStep === 3 && validateStep()) {
       console.log("Form submitted:", formData)
-   
-       toast.success("Form submitted successfully!");
+    // Add submission logic here
+    alert("Form submitted successfully!");
     
     }
-  }
+  };
 
   const downloadPDF = () => {
-    const pdf = new jsPDF()
-    let yPos = 10
+    const pdf = new jsPDF();
+    let yPos = 10;
 
     // Add title
-    pdf.setFontSize(20)
-    pdf.text("Merchant Application Form", 105, yPos, { align: "center" })
-    yPos += 20
+    pdf.setFontSize(20);
+    pdf.text("Merchant Application Form", 105, yPos, { align: "center" });
+    yPos += 20;
 
-    
-    const addSection = (title: string, data: Record<string, string | boolean>) => {
-      pdf.setFontSize(16)
-      pdf.text(title, 10, yPos)
-      yPos += 10
-      pdf.setFontSize(12)
+    // Helper function to add a section to the PDF
+    const addSection = (
+      title: string,
+      data: Record<string, string | boolean>
+    ) => {
+      pdf.setFontSize(16);
+      pdf.text(title, 10, yPos);
+      yPos += 10;
+      pdf.setFontSize(12);
       Object.entries(data).forEach(([key, value]) => {
-        pdf.text(`${key}: ${value}`, 20, yPos)
-        yPos += 7
+        pdf.text(`${key}: ${value}`, 20, yPos);
+        yPos += 7;
         if (yPos > 280) {
-          pdf.addPage()
-          yPos = 10
+          pdf.addPage();
+          yPos = 10;
         }
-      })
-      yPos += 10
-    }
+      });
+      yPos += 10;
+    };
 
     addSection("Personal Details", {
       "Full Name": formData.fullName,
@@ -244,7 +269,7 @@ const MerchantForm = () => {
       Nationality: formData.nationality,
       "ID Type": formData.idType,
       "ID Number": formData.idNumber,
-    })
+    });
 
     addSection("Financial Profile", {
       "Income Range": formData.income,
@@ -253,21 +278,23 @@ const MerchantForm = () => {
       Employer: formData.employerName,
       "Investment Experience": formData.investmentExperience,
       "Risk Tolerance": formData.riskTolerance,
-    })
+    });
 
     addSection("Declarations", {
-      "Politically Exposed Person": formData.isPoliticallyExposed ? "Yes" : "No",
+      "Politically Exposed Person": formData.isPoliticallyExposed
+        ? "Yes"
+        : "No",
       "Terms Accepted": formData.acceptedTerms ? "Yes" : "No",
-    })
+    });
 
-    pdf.save("merchant_application.pdf")
-  }
+    pdf.save("merchant_application.pdf");
+  };
 
   return (
-    <div className="container mx-auto px-4 py-8 h-screen -auto">
-      <div ref={formRef} className="max-h-full auto pb-8">
+    <div className="container mx-auto px-4 py-8 h-screen ">
+      <div ref={formRef} className="max-h-full  pb-8">
         <form onSubmit={handleSubmit}>
-          <Card className="w-full max-w-4xl mx-auto"> 
+          <Card className="w-full max-w-4xl mx-auto">
             <CardHeader>
               <CardTitle className="text-center text-2xl">
                 {steps.find((step) => step.number === currentStep)?.title}
@@ -276,15 +303,25 @@ const MerchantForm = () => {
             <CardContent>
               {renderStepIndicator()}
               {currentStep === 1 && (
-                <PersonalDetailsStep formData={formData} updateFormData={updateFormData} errors={errors} />
+                <PersonalDetailsStep
+                  formData={formData}
+                  updateFormData={updateFormData}
+                  errors={errors}
+                />
               )}
               {currentStep === 2 && (
-                <FinancialProfileStep formData={formData} updateFormData={updateFormData} errors={errors} />
+                <FinancialProfileStep
+                  formData={formData}
+                  updateFormData={updateFormData}
+                  errors={errors}
+                />
               )}
               {currentStep === 3 && renderReview()}
               {Object.keys(errors).length > 0 && (
                 <Alert variant="destructive" className="mt-4">
-                  <AlertDescription>Please correct the errors before proceeding.</AlertDescription>
+                  <AlertDescription>
+                    Please correct the errors before proceeding.
+                  </AlertDescription>
                 </Alert>
               )}
             </CardContent>
@@ -313,8 +350,7 @@ const MerchantForm = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MerchantForm
-
+export default MerchantForm;
