@@ -15,11 +15,11 @@ const Layout: React.FC = () => {
       <Navbar setIsOpen={setIsOpen} />
 
       {/* Sidebar + Content */}
-      <div className="flex flex-1">
+      <div className="flex flex-1 h-full overflow-hidden">
         <Sidebar isOpen={isOpen} />
 
         {/* Main Content Area */}
-        <main className="flex-1 p-4">
+        <main className="flex-1 p-4 overflow-y-auto bg-gray-100">
           <Outlet />
 
           {/* Support Icon & Chatbot */}
