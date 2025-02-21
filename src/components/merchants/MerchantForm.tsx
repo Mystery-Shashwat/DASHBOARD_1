@@ -9,6 +9,7 @@ import { Download, ArrowLeft, ArrowRight } from "lucide-react"
 import PersonalDetailsStep from "./PersonalDetails"
 import FinancialProfileStep from "./FinancialProfile"
 import jsPDF from "jspdf"
+import toast from "react-hot-toast";
 
 export interface FormData {
   fullName: string
@@ -200,8 +201,8 @@ const MerchantForm = () => {
     e.preventDefault()
     if (currentStep === 3 && validateStep()) {
       console.log("Form submitted:", formData)
-    // Add submission logic here
-    alert("Form submitted successfully!");
+   
+       toast.success("Form submitted successfully!");
     
     }
   }
@@ -232,7 +233,6 @@ const MerchantForm = () => {
       yPos += 10
     }
 
-    // Add sections
     addSection("Personal Details", {
       "Full Name": formData.fullName,
       "Date of Birth": formData.dateOfBirth,
@@ -301,7 +301,8 @@ const MerchantForm = () => {
               )}
               {currentStep === 3 && (
                 <div className="flex space-x-4">
-                  <Button type="submit">Submit Application</Button>
+                  <Button type="submit"  onClick={() => {
+                handleClick();}}>Submit Application</Button>
                   <Button type="button" variant="outline" onClick={downloadPDF}>
                     <Download className="mr-2 h-4 w-4" /> Download PDF
                   </Button>
