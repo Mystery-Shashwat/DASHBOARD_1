@@ -15,6 +15,7 @@ import { Download, ArrowLeft, ArrowRight } from "lucide-react";
 import PersonalDetailsStep from "./PersonalDetails";
 import FinancialProfileStep from "./FinancialProfile";
 import jsPDF from "jspdf";
+import { toast } from "react-hot-toast";
 
 export interface FormData {
   fullName: string;
@@ -220,6 +221,7 @@ const MerchantForm = () => {
       setCurrentStep((prev) => prev + 1);
     }
   };
+ 
 
   const handleBack = () => {
     setCurrentStep((prev) => prev - 1);
@@ -230,6 +232,7 @@ const MerchantForm = () => {
     if (currentStep === 3 && validateStep()) {
       console.log("Form submitted:", formData);
       // Add submission logic here
+      toast.success("Form submitted successfully");
     }
   };
 
@@ -295,6 +298,7 @@ const MerchantForm = () => {
   };
 
   return (
+    
     <div className="container mx-auto px-4 py-8 h-screen ">
       <div ref={formRef} className="max-h-full  pb-8">
         <form onSubmit={handleSubmit}>
@@ -344,9 +348,6 @@ const MerchantForm = () => {
                 <div className="flex space-x-4">
                   <Button
                     type="submit"
-                    onClick={() => {
-                      handleClick();
-                    }}
                   >
                     Submit Application
                   </Button>
