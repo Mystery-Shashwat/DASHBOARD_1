@@ -54,7 +54,7 @@ const SupportChatbot = ({ closeChat }: { closeChat: () => void }) => {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 w-80 bg-white shadow-lg border rounded-lg p-4 z-50">
+    <div className="fixed bottom-5 right-5 w-80 bg-white shadow-lg border rounded-lg p-4 z-50 ">
       {/* Close Button */}
       <button
         onClick={closeChat}
@@ -64,7 +64,7 @@ const SupportChatbot = ({ closeChat }: { closeChat: () => void }) => {
       </button>
 
       <h3 className="text-lg font-bold text-center">Support Chat</h3>
-      <div className="h-64 overflow-y-auto p-2">
+      <div className="h-64 overflow-y-auto p-2 chat-scrollBar">
         {chat.map((msg, index) => (
           <div
             key={index}

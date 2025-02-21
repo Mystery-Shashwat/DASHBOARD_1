@@ -19,7 +19,7 @@ const Layout: React.FC = () => {
         <Sidebar isOpen={isOpen} />
 
         {/* Main Content Area */}
-        <main className="flex-1 p-4 overflow-y-auto bg-gray-100">
+        <main className="flex-1 p-4 overflow-y-auto scrollbar-hidden bg-gray-100">
           <Outlet />
 
           {/* Support Icon & Chatbot */}

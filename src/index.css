@@ -413,6 +413,17 @@
     background-color: var(--btn-hover);
   }
 
+  .scrollbar-hidden {
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+  .chat-scrollBar {
+    scrollbar-width: thin;
+    /* scrollbar-color: var(--primary) var(--secondary); */
+  }
+
   /* .dark {
     --background: 0 0% 3.9%;
 
