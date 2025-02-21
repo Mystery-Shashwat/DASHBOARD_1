@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import Recent from "./pages/Recent";
 import Dashboard from "./pages/Dashboard";
+import MerchantForm from "./components/merchants/MerchantForm";
 
 const RouteConfig: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
@@ -45,9 +46,9 @@ const RouteConfig: React.FC = () => {
           <Route path="reports" element={<div>Transaction Reports</div>} />
         </Route>
         <Route path="/clients">
-          <Route path="all" element={<div>All Clients</div>} />
-          <Route path="vip" element={<div>VIP Accounts</div>} />
-          <Route path="prospects" element={<div>Prospects</div>} />
+          <Route path="all" element={<div>All Users</div>} />
+          <Route path="form" element={<MerchantForm/>} />
+         
         </Route>
         <Route path="/products">
           <Route path="investments" element={<div>Investments</div>} />

@@ -100,10 +100,10 @@ export function Sidebar({ isOpen }: SidebarProps) {
     { name: "Reports", path: "/transactions/reports" },
   ];
 
-  const clientItems = [
-    { name: "All Clients", path: "/clients/all" },
-    { name: "VIP Accounts", path: "/clients/vip" },
-    { name: "Prospects", path: "/clients/prospects" },
+  const MerchantItems = [
+    { name: "All Users", path: "/clients/all" },
+    { name: "Merchant Form", path: "/clients/form" },
+    
   ];
 
   const productItems = [
@@ -136,7 +136,7 @@ export function Sidebar({ isOpen }: SidebarProps) {
           </div>
 
           <Accordion type="multiple" className="space-y-2">
-            <SidebarGroup icon={Users} title="Clients" items={clientItems} />
+            <SidebarGroup icon={Users} title="Merchants" items={MerchantItems} />
             <SidebarGroup
               icon={Wallet}
               title="Transactions"
