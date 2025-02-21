@@ -36,9 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({ setIsOpen }) => {
           style={{ backgroundImage: "var(--logo-url)" }}
         ></div>
       </div>
-      <div>
-        <ThemeDropdown />
-      </div>
+     
       <div ref={userIconRef} className="relative">
         <CircleUserRound
           className="cursor-pointer text-black"
