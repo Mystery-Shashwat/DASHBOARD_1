@@ -5,9 +5,6 @@ import { useNavigate, Link } from "react-router-dom";
 import Castler_Logo from "../assets/images/cc.avif";
 import toast from "react-hot-toast";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../utils/firebase";
-
 interface MyTextInputProps {
   label: string;
   name: string;
@@ -87,23 +84,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         throw new Error("Login failed. Please try again.");
       }
 
-      // localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("isAuthenticated", "true");
 
-      signInWithEmailAndPassword(auth, values.email, values.password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          console.log(user);
-          navigate("/home");
-          toast.success("Successfully Logged In!");
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorMessage);
-          return;
-        });
+      toast.success("Successfully Logged In!");
+      navigate("/home");
     } catch (error) {
       toast.error("This didn't work.");
 
