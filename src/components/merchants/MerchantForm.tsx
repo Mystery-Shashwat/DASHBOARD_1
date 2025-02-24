@@ -38,28 +38,30 @@ export interface FormData {
   acceptedTerms: boolean;
 }
 
+const initialFormData: FormData = {
+  fullName: "",
+  dateOfBirth: "",
+  email: "",
+  phone: "",
+  nationality: "",
+  address: "",
+  city: "",
+  postalCode: "",
+  idType: "",
+  idNumber: "",
+  income: "",
+  sourceOfFunds: "",
+  employmentStatus: "",
+  employerName: "",
+  investmentExperience: "",
+  riskTolerance: "",
+  isPoliticallyExposed: false,
+  acceptedTerms: false,
+};
+
 const MerchantForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>({
-    fullName: "",
-    dateOfBirth: "",
-    email: "",
-    phone: "",
-    nationality: "",
-    address: "",
-    city: "",
-    postalCode: "",
-    idType: "",
-    idNumber: "",
-    income: "",
-    sourceOfFunds: "",
-    employmentStatus: "",
-    employerName: "",
-    investmentExperience: "",
-    riskTolerance: "",
-    isPoliticallyExposed: false,
-    acceptedTerms: false,
-  });
+  const [formData, setFormData] = useState<FormData>(initialFormData);
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -68,6 +70,12 @@ const MerchantForm = () => {
     { number: 2, title: "Financial Profile" },
     { number: 3, title: "Review & Submit" },
   ];
+
+  const resetForm = () => {
+    setFormData(initialFormData);
+    setCurrentStep(1);
+    setErrors({});
+  };
 
   const updateFormData = (field: keyof FormData, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -226,18 +234,28 @@ const MerchantForm = () => {
       setCurrentStep((prev) => prev + 1);
     }
   };
- 
 
   const handleBack = () => {
     setCurrentStep((prev) => prev - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (currentStep === 3 && validateStep()) {
-      console.log("Form submitted:", formData);
-
-      toast.success("Form submitted successfully");
+      try {
+   
+        console.log("Form submitted:", formData);
+        
+        toast.success("Form submitted successfully");
+        
+        resetForm();
+        
+       
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (error) {
+        toast.error("Error submitting form");
+        console.error("Form submission error:", error);
+      }
     }
   };
 
@@ -303,7 +321,6 @@ const MerchantForm = () => {
   };
 
   return (
-    
     <div className="container mx-auto px-4 py-8 h-screen ">
       <div ref={formRef} className="max-h-full  pb-8">
         <form onSubmit={handleSubmit}>

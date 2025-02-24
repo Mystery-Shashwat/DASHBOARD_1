@@ -36,11 +36,11 @@ const FinancialProfileStep = ({ formData, updateFormData }: FinancialProfileStep
                   <SelectValue placeholder="Select income range" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="0-25000">$0 - $25,000</SelectItem>
-                  <SelectItem value="25001-50000">$25,001 - $50,000</SelectItem>
-                  <SelectItem value="50001-100000">$50,001 - $100,000</SelectItem>
-                  <SelectItem value="100001-250000">$100,001 - $250,000</SelectItem>
-                  <SelectItem value="250001+">$250,001+</SelectItem>
+                  <SelectItem value="0-25000">₹0 - ₹25,000</SelectItem>
+                  <SelectItem value="25001-50000">₹25,001 - ₹50,000</SelectItem>
+                  <SelectItem value="50001-100000">₹50,001 - ₹100,000</SelectItem>
+                  <SelectItem value="100001-250000">₹100,001 - ₹250,000</SelectItem>
+                  <SelectItem value="250001+">₹250,001+</SelectItem>
                 </SelectContent>
               </Select>
             </div>
