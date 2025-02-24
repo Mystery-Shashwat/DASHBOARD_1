@@ -19,7 +19,6 @@ import {
   FileText,
   PieChart,
   type LucideIcon,
-  IndianRupee,
 } from "lucide-react";
 
 interface NavItemProps {
@@ -48,7 +47,7 @@ const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => {
     <Button
       variant="ghost"
       className={cn(
-        "w-full justify-start gap-2 text-white hover:text-black",
+        "w-full justify-start gap-2 text-sidebar-foreground hover:bg-[var(--bg-sidebar)] hover:text-white transition-all duration-200",
         isActive && "bg-muted text-black"
       )}
       onClick={() => to && navigate(to)}
@@ -69,7 +68,6 @@ const SidebarGroup = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Function to toggle the accordion
   const handleToggle = () => {
     setOpenAccordion(openAccordion === title ? null : title);
   };
@@ -77,7 +75,10 @@ const SidebarGroup = ({
   return (
     <AccordionItem value={title} className="border-none">
       <AccordionTrigger
-        className="py-2 text-white hover:bg-muted hover:text-black rounded-lg px-2"
+        className={cn(
+          "py-2 text-sidebar-foreground hover:bg-[var(--bg-sidebar)] hover:text-white rounded-lg px-2",
+          "transition-all duration-200"
+        )}
         onClick={handleToggle}
       >
         <div className="flex items-center gap-2">
@@ -86,7 +87,6 @@ const SidebarGroup = ({
         </div>
       </AccordionTrigger>
 
-      {/* Smooth transition effect for accordion content */}
       <AccordionContent
         className={cn(
           "pl-6 pt-1 transition-all duration-300 ease-in-out",
@@ -101,7 +101,8 @@ const SidebarGroup = ({
               key={item.path}
               variant="ghost"
               className={cn(
-                "justify-start text-white hover:text-black transition-all duration-300",
+                "justify-start text-sidebar-foreground hover:bg-[var(--bg-sidebar)] hover:text-white",
+                "transition-all duration-200",
                 location.pathname === item.path && "bg-muted text-black"
               )}
               onClick={() => navigate(item.path)}
@@ -119,23 +120,16 @@ export function Sidebar({ isOpen }: SidebarProps) {
   if (!isOpen) return null;
 
   const location = useLocation();
-  const [openAccordion, setOpenAccordion] = useState<string | null>(null); // 👈 Manages open section
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
   const transactionItems = [
     { name: "Recent", path: "/transactions/recent" },
-    // { name: "Pending", path: "/transactions/pending" },
     { name: "Reports", path: "/transactions/reports" },
   ];
 
   const clientItems = [
     { name: "All Merchants", path: "/clients/all" },
     { name: "Add Merchant", path: "/clients/form" },
-  ];
-
-  const productItems = [
-    { name: "Investments", path: "/products/investments" },
-    { name: "Loans", path: "/products/loans" },
-    { name: "Insurance", path: "/products/insurance" },
   ];
 
   const navItems = [
@@ -149,17 +143,16 @@ export function Sidebar({ isOpen }: SidebarProps) {
   ];
 
   return (
-    <div className="flex h-screen w-64 flex-col border-r bg-backgroundsidebar">
+    <div className="flex h-screen w-64 flex-col border-r bg-white">
       <div className="flex-1 overflow-y-auto">
         <nav className="p-4 space-y-2">
-          {/* <div className="mb-2">
-            <NavItem
-              icon={BarChart4}
-              title="Dashboard"
-              isActive={location.pathname === "/dashboard"}
-              to="/dashboard"
-            />
-          </div> */}
+          {/* Dashboard link at the top */}
+          {/* <NavItem
+            icon={BarChart4}
+            title="Dashboard"
+            isActive={location.pathname === "/dashboard"}
+            to="/dashboard"
+          /> */}
 
           <Accordion type="single" collapsible className="space-y-2">
             <SidebarGroup
@@ -176,16 +169,10 @@ export function Sidebar({ isOpen }: SidebarProps) {
               openAccordion={openAccordion}
               setOpenAccordion={setOpenAccordion}
             />
-            {/* <SidebarGroup
-              icon={IndianRupee}
-              title="Products"
-              items={productItems}
-              openAccordion={openAccordion}
-              setOpenAccordion={setOpenAccordion}
-            /> */}
           </Accordion>
 
-          <div className="space-y-2">
+          {/*  nav items */}
+          <div className="space-y-2 pt-2">
             {navItems.slice(1).map((item) => (
               <NavItem
                 key={item.path}

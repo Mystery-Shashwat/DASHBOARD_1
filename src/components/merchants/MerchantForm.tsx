@@ -81,7 +81,7 @@ const MerchantForm = () => {
           <div
             className={`flex items-center justify-center w-10 h-10 rounded-full ${
               currentStep >= step.number
-                ? "bg-primary text-primary-foreground"
+                ? "bg-backgroundsidebar text-primary-foreground"
                 : "bg-muted"
             }`}
           >
@@ -194,6 +194,7 @@ const MerchantForm = () => {
         newErrors.phone = "Phone number is required";
       } else if (!/^\+?[1-9]\d{1,14}$/.test(formData.phone)) {
         newErrors.phone = "Phone number is invalid";
+        toast.error("Invalid Phone Number")
       }
       if (!formData.address) newErrors.address = "Address is required";
       if (!formData.city) newErrors.city = "City is required";
@@ -340,7 +341,7 @@ const MerchantForm = () => {
             <CardFooter className="flex justify-between mt-6">
               {currentStep > 1 && (
                 <Button type="button" variant="outline" onClick={handleBack}>
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                  <ArrowLeft className="mr-2 h-4 w-4 " /> Back
                 </Button>
               )}
               {currentStep < 3 && (
