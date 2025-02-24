@@ -4,6 +4,9 @@ import * as Yup from "yup";
 import { useNavigate, Link } from "react-router-dom";
 import Castler_Logo from "../assets/images/cc.avif";
 import toast from "react-hot-toast";
+import { auth } from "../utils/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 interface SignUpFormProps {
   onSignup?: () => void;
 }
@@ -17,6 +20,8 @@ interface FormValues {
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
   const navigate = useNavigate();
+
+  // const auth = getAuth();
 
   const handleSubmit = async (
     values: FormValues,
@@ -36,6 +41,20 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
 
       if (onSignup) {
         toast.success("Successfully Logged In!");
+        createUserWithEmailAndPassword(auth, values.email, values.password)
+          .then((userCredential) => {
+            // Signed up
+            const user = userCredential.user;
+            console.log(user);
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage);
+            // ..
+          });
+
         navigate("/home");
       }
     } catch (error: any) {
@@ -78,7 +97,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
             .oneOf([Yup.ref("password"), ""], "Passwords must match")
             .required("Confirm Password is required"),
         })}
-        onSubmit={handleSubmit}
+        onSubmit={(values, { setSubmitting, setFieldError }) => {
+          handleSubmit(values, { setSubmitting, setFieldError });
+        }}
       >
         {({ isSubmitting }) => (
           <Form className="space-y-4">
