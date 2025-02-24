@@ -190,7 +190,11 @@ const MerchantForm = () => {
       if (!formData.dateOfBirth)
         newErrors.dateOfBirth = "Date of birth is required";
       if (!formData.email) newErrors.email = "Email is required";
-      if (!formData.phone) newErrors.phone = "Phone number is required";
+      if (!formData.phone) {
+        newErrors.phone = "Phone number is required";
+      } else if (!/^\+?[1-9]\d{1,14}$/.test(formData.phone)) {
+        newErrors.phone = "Phone number is invalid";
+      }
       if (!formData.address) newErrors.address = "Address is required";
       if (!formData.city) newErrors.city = "City is required";
       if (!formData.postalCode)
@@ -231,7 +235,7 @@ const MerchantForm = () => {
     e.preventDefault();
     if (currentStep === 3 && validateStep()) {
       console.log("Form submitted:", formData);
-      // Add submission logic here
+
       toast.success("Form submitted successfully");
     }
   };

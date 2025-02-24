@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-const chatFlow = {
+type ChatFlow = {
+  [key: string]: {
+    message: string;
+    options?: string[];
+    input?: boolean;
+  };
+};
+
+const chatFlow: ChatFlow = {
   start: {
     message: "Hello! How can we help you?",
     options: ["Billing Issue", "Technical Issue"],

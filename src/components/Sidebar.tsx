@@ -152,16 +152,15 @@ export function Sidebar({ isOpen }: SidebarProps) {
     <div className="flex h-screen w-64 flex-col border-r bg-backgroundsidebar">
       <div className="flex-1 overflow-y-auto">
         <nav className="p-4 space-y-2">
-          <div className="mb-2">
+          {/* <div className="mb-2">
             <NavItem
               icon={BarChart4}
               title="Dashboard"
               isActive={location.pathname === "/dashboard"}
               to="/dashboard"
             />
-          </div>
+          </div> */}
 
-          {/* Controlled Accordion */}
           <Accordion type="single" collapsible className="space-y-2">
             <SidebarGroup
               icon={Users}
