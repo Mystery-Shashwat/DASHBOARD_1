@@ -258,17 +258,17 @@ const MerchantForm = () => {
       }
     }
   };
+  //add pdf button
 
   const downloadPDF = () => {
     const pdf = new jsPDF();
     let yPos = 10;
 
-    // Add title
     pdf.setFontSize(20);
     pdf.text("Merchant Application Form", 105, yPos, { align: "center" });
     yPos += 20;
 
-    // Helper function to add a section to the PDF
+    
     const addSection = (
       title: string,
       data: Record<string, string | boolean>
