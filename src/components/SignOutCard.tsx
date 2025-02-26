@@ -2,22 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ThemeDropdown from "../ThemeDropdown";
 import toast from "react-hot-toast";
+
 const SignOutCard: React.FC = () => {
   return (
-    <div className="absolute right-4 mt-2 w-48 bg-backgroundsidebar text-gray-800 rounded-lg shadow-lg p-4">
-      <div className="flex flex-col space-y-3">
-        <button className="hover:bg-gray-100 hover:text-black font-bold text-white p-2 rounded cursor-pointer text-left">
+    <div className="absolute right-4 mt-2 w-48 bg-white text-gray-800 rounded-xl shadow-lg border border-gray-200 p-4">
+      <div className="flex flex-col items-start space-y-2">
+        <button className="w-full text-left text-black px-3 py-2 rounded-lg cursor-pointer transition-all duration-300 hover:bg-backgroundsidebar hover:text-white">
           Profile
         </button>
-        <button className="hover:bg-gray-100 hover:text-black font-bold text-white p-2 rounded cursor-pointer text-left">
+        <button className="w-full text-left text-black px-3 py-2 rounded-lg cursor-pointer transition-all duration-300 hover:bg-backgroundsidebar hover:text-white">
           Settings
         </button>
-        <div>
+        <div className="w-full">
           <ThemeDropdown />
         </div>
         <Link
           to="/"
-          className="hover:bg-gray-100 hover:text-black font-bold text-white p-2 rounded cursor-pointer text-textsecondary block"
+          className="w-full text-left text-textsecondary px-3 py-2 rounded-lg cursor-pointer transition-all duration-300 hover:bg-backgroundsidebar hover:text-white"
           onClick={() => toast.success("Signed Out Successfully!")}
         >
           Sign Out

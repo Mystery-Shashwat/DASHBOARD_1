@@ -17,13 +17,13 @@ const ThemeDropdown: React.FC = () => {
     <select
       value={theme}
       onChange={handleThemeChange}
-      className="bg-textsecondary outline-none cursor-pointer text-white p-2 rounded"
+      className="bg-white outline-none cursor-pointer  text-black p-2 rounded hover:bg-backgroundsidebar hover:text-white "
     >
       {themes.map((themeName) => (
         <option
           key={themeName}
           value={themeName}
-          className="bg-transparent text-inherit p-2"
+          className="bg-white text-black p-2 cursor-pointer "
         >
           {themeName.charAt(0).toUpperCase() + themeName.slice(1)}
         </option>

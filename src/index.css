@@ -499,3 +499,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.chatbot-container {
+  height: 500px; /* Fixed height for chatbot */
+  display: flex;
+  flex-direction: column;
+}
+
+#chat-container {
+  flex-grow: 1;
+  height: 380px; /* Fixed height for chat area */
+  overflow-y: auto; /* Enables scrolling */
+  padding: 12px;
+  background-color: #f9fafb; /* Light background */
+}
+
