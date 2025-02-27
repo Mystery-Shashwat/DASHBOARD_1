@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import MerchantForm from "./components/merchants/MerchantForm";
 import AllUsers from "./pages/AllUsers";
 import  Tickets  from "./pages/Tickets";
+import DocumentView from "./components/DocumentView";
 
 const RouteConfig: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
@@ -70,7 +71,7 @@ const RouteConfig: React.FC = () => {
           <Route path="/history" element={<div>History</div>} />
           <Route path="/tickets" element={<Tickets/>} />
           <Route path="/notifications" element={<div>Notifications</div>} />
-          <Route path="/documents" element={<div>Documents</div>} />
+          <Route path="/documents" element={<DocumentView/>} />
           <Route path="/settings" element={<div>Settings</div>} />
         </Route>
       </Routes>

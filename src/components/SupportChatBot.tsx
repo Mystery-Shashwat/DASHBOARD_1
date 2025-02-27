@@ -8,7 +8,7 @@ import {
   Clock,
   ExternalLink,
 } from "lucide-react";
-import { useDispatch, UseDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import { addTicket } from "@/Redux/ticketSlice";
 
 type ChatFlow = {
