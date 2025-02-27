@@ -48,7 +48,7 @@ const NavItem = ({ icon: Icon, title, isActive, to }: NavItemProps) => {
       variant="ghost"
       className={cn(
         "w-full justify-start gap-2 text-sidebar-foreground hover:bg-[var(--bg-sidebar)] hover:text-white transition-all duration-200",
-        isActive && "bg-muted text-black"
+        isActive && "bg-[var(--bg-sidebar)] text-white"
       )}
       onClick={() => to && navigate(to)}
     >
@@ -103,7 +103,8 @@ const SidebarGroup = ({
               className={cn(
                 "justify-start text-sidebar-foreground hover:bg-[var(--bg-sidebar)] hover:text-white",
                 "transition-all duration-200",
-                location.pathname === item.path && "bg-muted text-black"
+                location.pathname === item.path &&
+                  "bg-[var(--bg-sidebar)] text-white"
               )}
               onClick={() => navigate(item.path)}
             >
@@ -136,7 +137,7 @@ export function Sidebar({ isOpen }: SidebarProps) {
     { icon: BarChart4, title: "Dashboard", path: "/dashboard" },
     { icon: PieChart, title: "Analytics", path: "/analytics" },
     { icon: Clock, title: "History", path: "/history" },
-    { icon: MessageSquare, title: "Messages", path: "/messages" },
+    { icon: MessageSquare, title: "Tickets", path: "/tickets" },
     { icon: Bell, title: "Notifications", path: "/notifications" },
     { icon: FileText, title: "Documents", path: "/documents" },
     { icon: Settings, title: "Settings", path: "/settings" },

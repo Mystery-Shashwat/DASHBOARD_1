@@ -8,6 +8,8 @@ import {
   Clock,
   ExternalLink,
 } from "lucide-react";
+import { useDispatch, UseDispatch } from "react-redux";
+import { addTicket } from "@/Redux/ticketSlice";
 
 type ChatFlow = {
   [key: string]: {
@@ -33,7 +35,7 @@ const chatFlow: ChatFlow = {
       "Account Security",
       "Transaction Help",
       "Service Upgrade",
-      "View My Tickets",
+      // "View My Tickets",
     ],
     description: "Our team is ready to help with any financial matters.",
   },
@@ -148,6 +150,7 @@ const sampleTickets: TicketData[] = [
 ];
 
 const SupportChatbot = ({ closeChat }: { closeChat: () => void }) => {
+  const dispatch = useDispatch();
   const [chat, setChat] = useState<
     { role: string; text: string; description?: string }[]
   >([
@@ -218,6 +221,8 @@ const SupportChatbot = ({ closeChat }: { closeChat: () => void }) => {
         hour12: false,
       }),
     };
+
+    dispatch(addTicket(newTicket));
 
     // Add ticket to state
     setTickets((prev) => [newTicket, ...prev]);

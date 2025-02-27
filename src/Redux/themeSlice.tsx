@@ -8,8 +8,8 @@ const themeSlice = createSlice({
   initialState: { theme: initialTheme },
   reducers: {
     setTheme: (state, action) => {
-      console.log("In setTheme in slice");
       state.theme = action.payload;
+      console.log("In setTheme in slice" + state.theme);
       localStorage.setItem("theme", action.payload);
       document.documentElement.setAttribute("data-theme", action.payload);
     },
