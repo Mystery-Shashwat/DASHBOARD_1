@@ -6,7 +6,7 @@ import SupportChatBot from "./components/SupportChatBot.tsx";
 import Support from "./assets/images/support.png";
 
 const Layout: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   const [isSupport, setIsSupport] = useState<boolean>(false);
 
   return (
