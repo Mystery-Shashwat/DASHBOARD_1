@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 // import LoginForm from "./components/LoginForm";
 // import SignUpForm from "./components/SignUpForm";
@@ -10,7 +10,6 @@ import Dashboard from "./pages/Dashboard";
 import MerchantForm from "./components/merchants/MerchantForm";
 import AllUsers from "./pages/AllUsers";
 import  Tickets  from "./pages/Tickets";
-import DocumentView from "./components/DocumentView";
 
 const RouteConfig: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
@@ -28,27 +27,37 @@ const RouteConfig: React.FC = () => {
 
   return (
     <div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? (
-              <LoginPage onLogin={handleLogin} />
-            ) : (
-              <Navigate to="/signup" />
-            )
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            isAuthenticated ? (
-              <SignUpPage onSignup={handleSignup} />
-            ) : (
-              <Navigate to="/home" />
-            )
-          }
-        />
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center h-screen bg-gray-100">
+            <div className="text-center">
+              <FadeLoader size={50} color="#007bff" speedMultiplier={0.8} />
+              <p className="mt-4 text-lg text-gray-600">Loading...</p>
+            </div>
+          </div>
+        }
+      >
+        <Routes>
+          <Route
+            path="/"
+            element={
+              isAuthenticated ? (
+                <LoginPage onLogin={handleLogin} />
+              ) : (
+                <Navigate to="/signup" />
+              )
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              isAuthenticated ? (
+                <SignUpPage onSignup={handleSignup} />
+              ) : (
+                <Navigate to="/home" />
+              )
+            }
+          />
 
         <Route element={isAuthenticated ? <Layout /> : <Navigate to="/" />}>
           <Route path="/home" element={<Dashboard />} />
@@ -71,7 +80,7 @@ const RouteConfig: React.FC = () => {
           <Route path="/history" element={<div>History</div>} />
           <Route path="/tickets" element={<Tickets/>} />
           <Route path="/notifications" element={<div>Notifications</div>} />
-          <Route path="/documents" element={<DocumentView/>} />
+          <Route path="/documents" element={<div>Documents</div>} />
           <Route path="/settings" element={<div>Settings</div>} />
         </Route>
       </Routes>

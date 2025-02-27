@@ -1,6 +1,6 @@
 "use client";
 
-import type React from "react";
+import React from "react";
 import { useState, useRef } from "react";
 import {
   Card,
@@ -12,10 +12,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Download, ArrowLeft, ArrowRight } from "lucide-react";
-import PersonalDetailsStep from "./PersonalDetails";
-import FinancialProfileStep from "./FinancialProfile";
 import jsPDF from "jspdf";
 import { toast } from "react-hot-toast";
+import PersonalDetailsShimmer from "../PersonalDetailsShimmer";
+const PersonalDetailsStep = React.lazy(() => import("./PersonalDetails"));
+const FinancialProfileStep = React.lazy(() => import("./FinancialProfile"));
 
 export interface FormData {
   fullName: string;
@@ -202,7 +203,7 @@ const MerchantForm = () => {
         newErrors.phone = "Phone number is required";
       } else if (!/^\+?[1-9]\d{1,14}$/.test(formData.phone)) {
         newErrors.phone = "Phone number is invalid";
-        toast.error("Invalid Phone Number")
+        toast.error("Invalid Phone Number");
       }
       if (!formData.address) newErrors.address = "Address is required";
       if (!formData.city) newErrors.city = "City is required";
@@ -243,15 +244,13 @@ const MerchantForm = () => {
     e.preventDefault();
     if (currentStep === 3 && validateStep()) {
       try {
-   
         console.log("Form submitted:", formData);
-        
+
         toast.success("Form submitted successfully");
-        
+
         resetForm();
-        
-       
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (error) {
         toast.error("Error submitting form");
         console.error("Form submission error:", error);
@@ -268,7 +267,6 @@ const MerchantForm = () => {
     pdf.text("Merchant Application Form", 105, yPos, { align: "center" });
     yPos += 20;
 
-    
     const addSection = (
       title: string,
       data: Record<string, string | boolean>
@@ -333,18 +331,22 @@ const MerchantForm = () => {
             <CardContent>
               {renderStepIndicator()}
               {currentStep === 1 && (
-                <PersonalDetailsStep
-                  formData={formData}
-                  updateFormData={updateFormData}
-                  errors={errors}
-                />
+                <React.Suspense fallback={<PersonalDetailsShimmer />}>
+                  <PersonalDetailsStep
+                    formData={formData}
+                    updateFormData={updateFormData}
+                    errors={errors}
+                  />
+                </React.Suspense>
               )}
               {currentStep === 2 && (
-                <FinancialProfileStep
-                  formData={formData}
-                  updateFormData={updateFormData}
-                  errors={errors}
-                />
+                <React.Suspense fallback={<PersonalDetailsShimmer />}>
+                  <FinancialProfileStep
+                    formData={formData}
+                    updateFormData={updateFormData}
+                    errors={errors}
+                  />
+                </React.Suspense>
               )}
               {currentStep === 3 && renderReview()}
               {Object.keys(errors).length > 0 && (
@@ -368,11 +370,7 @@ const MerchantForm = () => {
               )}
               {currentStep === 3 && (
                 <div className="flex space-x-4">
-                  <Button
-                    type="submit"
-                  >
-                    Submit Application
-                  </Button>
+                  <Button type="submit">Submit Application</Button>
                   <Button type="button" variant="outline" onClick={downloadPDF}>
                     <Download className="mr-2 h-4 w-4" /> Download PDF
                   </Button>
