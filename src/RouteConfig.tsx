@@ -4,7 +4,7 @@ const Layout = React.lazy(() => import("./Layout"));
 import FadeLoader from "react-spinners/FadeLoader";
 import DashboardShimmer from "./components/DashboardShimmer";
 import RecentShimmer from "./components/RecentShimmer";
-import DocumentView from "./components/DocumentView";
+import History from "./components/History";
 // Lazy-loaded components
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const SignUpPage = React.lazy(() => import("./pages/SignUpPage"));
@@ -144,10 +144,10 @@ const RouteConfig: React.FC = () => {
               <Route path="insurance" element={<div>Insurance</div>} />
             </Route>
             <Route path="/analytics" element={<div>Analytics</div>} />
-            <Route path="/history" element={<div>History</div>} />
+            <Route path="/history" element={<History/> }/>
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/notifications" element={<div>Notifications</div>} />
-            <Route path="/documents" element={<DocumentView/>} />
+            <Route path="/documents" element={<div>Document</div>} />
             <Route path="/settings" element={<div>Settings</div>} />
           </Route>
         </Routes>

@@ -82,7 +82,7 @@ interface AnalyticsSummary {
   pendingActions: number;
 }
 
-const DocumentView: React.FC<{ documentId?: string }> = ({ documentId }) => {
+const History: React.FC<{ documentId?: string }> = ({ documentId }) => {
   const [document, setDocument] = useState<FinancialDocument | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState<string>("overview");
@@ -100,7 +100,7 @@ const DocumentView: React.FC<{ documentId?: string }> = ({ documentId }) => {
           type: "statement",
           date: "2025-02-27",
           dueDate: "2025-03-15",
-          currency: "USD",
+          currency: "INR",
           transactions: [
             {
               id: "tx-001",
@@ -485,4 +485,4 @@ const DocumentView: React.FC<{ documentId?: string }> = ({ documentId }) => {
   );
 };
 
-export default DocumentView;
+export default History;
