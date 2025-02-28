@@ -3,7 +3,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-const DashboardShimmer = () => {
+const DashboardShimmer: React.FC  = () => {
   return (
     <div className="h-screen overflow-y-auto">
       <div className="container mx-auto p-6">

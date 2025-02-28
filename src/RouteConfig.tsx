@@ -5,6 +5,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 import DashboardShimmer from "./components/DashboardShimmer";
 import RecentShimmer from "./components/RecentShimmer";
 import History from "./components/History";
+import AllUsersShimmer from "./components/AllUsersShimmer";
 // Lazy-loaded components
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const SignUpPage = React.lazy(() => import("./pages/SignUpPage"));
@@ -138,7 +139,7 @@ const RouteConfig: React.FC = () => {
               <Route
                 path="all"
                 element={
-                  <Suspense fallback={<AllUsersShimmer />}>
+                  <Suspense fallback={<AllUsersShimmer/>}>
                     <AllUsers />
                   </Suspense>
                 }

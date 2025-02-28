@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-const AllUsersShimmer = () => {
+const AllUsersShimmer: React.FC = () => {
   return (
     <div className="bg-white shadow-lg rounded-2xl px-5 w-3/4 mx-auto mt-10">
       {/* Title Shimmer */}
@@ -10,7 +10,7 @@ const AllUsersShimmer = () => {
       </div>
 
       {/* Table Shimmer */}
-      <Table className="">
+      <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">
