@@ -36,7 +36,6 @@ import AnalyticsTab from "./AnalyticsTab";
 import DetailsTab from "./DetailsTab";
 import { getStatusColor, formatDate, formatCurrency } from "./utils";
 
-// Define types
 interface Transaction {
   id: string;
   date: string;

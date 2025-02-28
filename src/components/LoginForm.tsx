@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik, Form, useField, FormikHelpers } from "formik";
+import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { useNavigate, Link } from "react-router-dom";
 import Castler_Logo from "../assets/images/cc.avif";
@@ -37,9 +37,48 @@ const MyTextInput: React.FC<MyTextInputProps> = ({ label, ...props }) => {
   );
 };
 
+// Add select input for role selection
+interface MySelectInputProps {
+  label: string;
+  name: string;
+  id?: string;
+  children: React.ReactNode;
+}
+
+const MySelectInput: React.FC<MySelectInputProps> = ({
+  label,
+  children,
+  ...props
+}) => {
+  const [field, meta] = useField(props);
+  return (
+    <div>
+      <label
+        className="block text-gray-700 text-sm font-semibold mb-2"
+        htmlFor={props.id || props.name}
+      >
+        {label}
+      </label>
+      <select
+        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+          meta.touched && meta.error ? "border-red-500" : ""
+        }`}
+        {...field}
+        {...props}
+      >
+        {children}
+      </select>
+      {meta.touched && meta.error ? (
+        <p className="text-red-500 text-xs mt-1">{meta.error}</p>
+      ) : null}
+    </div>
+  );
+};
+
 interface LoginFormValues {
   email: string;
   password: string;
+  role: string;
 }
 
 interface LoginFormProps {
@@ -50,26 +89,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const navigate = useNavigate();
   const [authError, setAuthError] = useState<string | null>(null);
 
-  // const handleSubmit = async (
-  //   values: LoginFormValues,
-  //   { setSubmitting }: FormikHelpers<LoginFormValues>
-  // ) => {
-  //   setAuthError(null);
-  //   try {
-
-  //     await new Promise((resolve, reject) => {
-  //       setTimeout(() => {
-  //         if (
-  //           values.email === "user@example.com" &&
-  //           values.password === "password123"
-  //         ) {
-  //           resolve("Authenticated");
-  //         } else {
-  //           reject(new Error("Invalid email or password"));
-  //         }
-  //       }, 1000);
-  //     });
-
   const handleClick = () => {
     console.log("Clicking ....");
   };
@@ -79,18 +98,29 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
     { setSubmitting, setFieldError }: any
   ) => {
     try {
+      if (values.role === "admin" && !values.email.includes("admin")) {
+        throw new Error("Invalid email for admin role.");
+      }
+
       const response = true;
       if (!response) {
         throw new Error("Login failed. Please try again.");
       }
 
+      // Store authentication info including role
       localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("userRole", values.role);
 
       toast.success("Successfully Logged In!");
-      navigate("/home");
+
+      // Navigate based on role
+      if (values.role === "admin") {
+        navigate("/home");
+      } else {
+        navigate("/home");
+      }
     } catch (error) {
       toast.error("This didn't work.");
-
       setAuthError("Invalid email or password. Please try again.");
     } finally {
       setSubmitting(false);
@@ -99,15 +129,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
 
   return (
     <div className="w-full max-w-md mx-auto flex flex-col justify-cente">
-      {/* Logo centered at the top */}
-      {/* <div className="flex justify-center mb-6">
-        <img
-          style={{ backgroundImage: "var(--logo-url)" }}
-          // src="https://latestlogo.com/wp-content/uploads/2024/01/idfc-first-bank-logo.svg"
-          alt="Castler Logo"
-          className="w-24 h-24"
-        />
-      </div> */}
       {/* Logo */}
       <div className="flex justify-center mb-6">
         <div
@@ -128,6 +149,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         initialValues={{
           email: "",
           password: "",
+          role: "user",
         }}
         validationSchema={Yup.object({
           email: Yup.string()
@@ -136,6 +158,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           password: Yup.string()
             .min(8, "Password must be at least 8 characters")
             .required("Password is required"),
+          role: Yup.string().required("Please select a role"),
         })}
         onSubmit={handleSubmit}
       >
@@ -147,17 +170,27 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
               type="email"
               placeholder="yourname@example.com"
             />
-            <MyTextInput
-              label="Password"
-              name="password"
-              type="password"
-              placeholder="••••••••"
-            />
+
+            <div className="mt-4">
+              <MyTextInput
+                label="Password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+              />
+            </div>
+
+            <div className="mt-4">
+              <MySelectInput label="Login As" name="role">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </MySelectInput>
+            </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full button text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4 "
+              className="w-full button text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4"
               onClick={() => {
                 handleClick();
               }}
@@ -187,11 +220,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
       </Formik>
       <div className="flex flex-col items-center mt-6">
         <p className="text-center text-textsecondary text-sm">Powered By</p>
-        <img
-          src={Castler_Logo}
-          alt="Castler Logo"
-          className="w-25 h-10 mt-2   "
-        />
+        <img src={Castler_Logo} alt="Castler Logo" className="w-25 h-10 mt-2" />
       </div>
     </div>
   );

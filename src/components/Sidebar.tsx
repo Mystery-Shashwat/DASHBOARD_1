@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -122,6 +122,14 @@ export function Sidebar({ isOpen }: SidebarProps) {
 
   const location = useLocation();
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string>("user");
+
+  useEffect(() => {
+    const storedRole = localStorage.getItem("userRole");
+    if (storedRole) {
+      setUserRole(storedRole);
+    }
+  }, []);
 
   const transactionItems = [
     { name: "Recent", path: "/transactions/recent" },
@@ -133,48 +141,95 @@ export function Sidebar({ isOpen }: SidebarProps) {
     { name: "Add Merchant", path: "/clients/form" },
   ];
 
-  const navItems = [
-    { icon: BarChart4, title: "Dashboard", path: "/dashboard" },
-    { icon: PieChart, title: "Analytics", path: "/analytics" },
-    { icon: Clock, title: "History", path: "/history" },
-    { icon: MessageSquare, title: "Tickets", path: "/tickets" },
-    { icon: Bell, title: "Notifications", path: "/notifications" },
-    { icon: FileText, title: "Documents", path: "/documents" },
-    { icon: Settings, title: "Settings", path: "/settings" },
+  const baseNavItems = [
+    {
+      icon: BarChart4,
+      title: "Dashboard",
+      path: "/dashboard",
+      roles: ["user", "admin"],
+    },
+    {
+      icon: PieChart,
+      title: "Analytics",
+      path: "/analytics",
+      roles: ["user", "admin"],
+    },
+     
+    { icon: Clock, title: "History", path: "/history", roles: ["admin"] },
+    {
+      icon: MessageSquare,
+      title: userRole === "admin" ? "All Tickets" : "Tickets",
+      path: "/tickets",
+      roles: ["user", "admin"],
+    },
+    {
+      icon: Bell,
+      title: "Notifications",
+      path: "/notifications",
+      roles: ["user", "admin"],
+    },
+    {
+      icon: FileText,
+      title: userRole === "admin" ? "Doc Verification" : "Documents",
+      path: userRole === "admin" ? "/doc-verification" : "/documents",
+      roles: ["user", "admin"],
+    },
+    {
+      icon: Settings,
+      title: "Settings",
+      path: "/settings",
+      roles: ["user", "admin"],
+    },
   ];
+
+  const filteredNavItems = baseNavItems.filter((item) =>
+    item.roles.includes(userRole)
+  );
 
   return (
     <div className="flex h-screen w-64 flex-col border-r bg-white">
       <div className="flex-1 overflow-y-auto">
         <nav className="p-4 space-y-2">
-          {/* Dashboard link at the top */}
-          {/* <NavItem
+          <NavItem
             icon={BarChart4}
             title="Dashboard"
             isActive={location.pathname === "/dashboard"}
             to="/dashboard"
-          /> */}
+          />
 
-          <Accordion type="single" collapsible className="space-y-2">
-            <SidebarGroup
-              icon={Users}
-              title="Clients"
-              items={clientItems}
-              openAccordion={openAccordion}
-              setOpenAccordion={setOpenAccordion}
-            />
-            <SidebarGroup
-              icon={Wallet}
-              title="Transactions"
-              items={transactionItems}
-              openAccordion={openAccordion}
-              setOpenAccordion={setOpenAccordion}
-            />
-          </Accordion>
+          {userRole === "admin" && (
+            <Accordion type="single" collapsible className="space-y-2">
+              <SidebarGroup
+                icon={Users}
+                title="Clients"
+                items={clientItems}
+                openAccordion={openAccordion}
+                setOpenAccordion={setOpenAccordion}
+              />
+              <SidebarGroup
+                icon={Wallet}
+                title="Transactions"
+                items={transactionItems}
+                openAccordion={openAccordion}
+                setOpenAccordion={setOpenAccordion}
+              />
+            </Accordion>
+          )}
 
-          {/*  nav items */}
+          {userRole === "user" && (
+            <Accordion type="single" collapsible className="space-y-2">
+              <SidebarGroup
+                icon={Wallet}
+                title="Transactions"
+                items={transactionItems}
+                openAccordion={openAccordion}
+                setOpenAccordion={setOpenAccordion}
+              />
+            </Accordion>
+          )}
+
           <div className="space-y-2 pt-2">
-            {navItems.slice(1).map((item) => (
+            {filteredNavItems.slice(1).map((item) => (
               <NavItem
                 key={item.path}
                 icon={item.icon}

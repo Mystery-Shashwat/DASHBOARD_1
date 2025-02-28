@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useNavigate, Link } from "react-router-dom";
 import Castler_Logo from "../assets/images/cc.avif";
 import toast from "react-hot-toast";
+
 interface SignUpFormProps {
   onSignup?: () => void;
 }
@@ -13,6 +14,7 @@ interface FormValues {
   email: string;
   password: string;
   confirmPassword: string;
+  role: string;
 }
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
@@ -23,6 +25,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
     { setSubmitting, setFieldError }: any
   ) => {
     try {
+      // Check if the role matches the email pattern
+      // For admin: email should contain "admin"
+      if (values.role === "admin" && !values.email.includes("admin")) {
+        throw new Error("Email format is not valid for admin role.");
+      }
+      
       const response = true;
       // const response = await fetch("https://mockapi.com/signup", {
       //   method: "POST",
@@ -34,9 +42,18 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
         throw new Error("Signup failed. Please try again.");
       }
 
+      // Store role information
+      localStorage.setItem("userRole", values.role);
+
       if (onSignup) {
-        toast.success("Successfully Logged In!");
-        navigate("/home");
+        toast.success("Successfully Signed Up!");
+        
+        // Navigate based on role
+        if (values.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/home");
+        }
       }
     } catch (error: any) {
       setFieldError("email", error.message || "Registration failed.");
@@ -65,6 +82,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
           email: "",
           password: "",
           confirmPassword: "",
+          role: "user"
         }}
         validationSchema={Yup.object({
           name: Yup.string().required("Name is required"),
@@ -77,6 +95,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
           confirmPassword: Yup.string()
             .oneOf([Yup.ref("password"), ""], "Passwords must match")
             .required("Confirm Password is required"),
+          role: Yup.string()
+            .required("Please select a role")
         })}
         onSubmit={handleSubmit}
       >
@@ -154,6 +174,26 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
               />
             </div>
 
+            {/* Role Selection Field */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700">
+                Account Type
+              </label>
+              <Field
+                as="select"
+                name="role"
+                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-400"
+              >
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </Field>
+              <ErrorMessage
+                name="role"
+                component="p"
+                className="text-texterror text-xs mt-1"
+              />
+            </div>
+
             {/* Submit Button */}
             <button
               type="submit"
@@ -183,7 +223,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignup }) => {
         <img
           src={Castler_Logo}
           alt="Castler Logo"
-          className="w-25 h-10 mt-2   "
+          className="w-25 h-10 mt-2"
         />
       </div>
     </div>
