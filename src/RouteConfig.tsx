@@ -135,7 +135,14 @@ const RouteConfig: React.FC = () => {
               <Route path="reports" element={<div>Transaction Reports</div>} />
             </Route>
             <Route path="/clients">
-              <Route path="all" element={<AllUsers />} />
+              <Route
+                path="all"
+                element={
+                  <Suspense fallback={<AllUsersShimmer />}>
+                    <AllUsers />
+                  </Suspense>
+                }
+              />
               <Route path="form" element={<MerchantForm />} />
             </Route>
             <Route path="/products">
@@ -146,6 +153,14 @@ const RouteConfig: React.FC = () => {
             <Route path="/analytics" element={<div>Analytics</div>} />
             <Route path="/history" element={<History/> }/>
             <Route path="/tickets" element={<Tickets />} />
+            <Route
+              path="/tickets"
+              element={
+                <Suspense>
+                  <Tickets />{" "}
+                </Suspense>
+              }
+            />
             <Route path="/notifications" element={<div>Notifications</div>} />
             <Route path="/documents" element={<div>Document</div>} />
             <Route path="/settings" element={<div>Settings</div>} />
