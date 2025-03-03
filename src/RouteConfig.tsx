@@ -6,6 +6,9 @@ import DashboardShimmer from "./components/DashboardShimmer";
 import RecentShimmer from "./components/RecentShimmer";
 import History from "./components/History";
 import AllUsersShimmer from "./components/AllUsersShimmer";
+import Documents from "./components/Documents";
+
+import DocVerification from "./components/DocVerification";
 // Lazy-loaded components
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const SignUpPage = React.lazy(() => import("./pages/SignUpPage"));
@@ -16,6 +19,7 @@ const MerchantForm = React.lazy(
 );
 const AllUsers = React.lazy(() => import("./pages/AllUsers"));
 const Tickets = React.lazy(() => import("./pages/Tickets"));
+
 
 const RouteConfig: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
@@ -163,7 +167,8 @@ const RouteConfig: React.FC = () => {
               }
             />
             <Route path="/notifications" element={<div>Notifications</div>} />
-            <Route path="/documents" element={<div>Document</div>} />
+            <Route path="/documents" element={<Documents/>} />
+            <Route path="/doc-verification" element={<DocVerification/>}/>
             <Route path="/settings" element={<div>Settings</div>} />
           </Route>
         </Routes>
