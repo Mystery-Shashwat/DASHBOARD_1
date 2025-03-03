@@ -1,14 +1,18 @@
 import React, { useState, Suspense } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 const Layout = React.lazy(() => import("./Layout"));
+// const DocumentView = React.lazy(() => import("./components/DocumentView"));
 import FadeLoader from "react-spinners/FadeLoader";
 import DashboardShimmer from "./components/DashboardShimmer";
 import RecentShimmer from "./components/RecentShimmer";
-import History from "./components/History";
 import AllUsersShimmer from "./components/AllUsersShimmer";
+<<<<<<< Updated upstream
 import Documents from "./components/Documents";
 
 import DocVerification from "./components/DocVerification";
+=======
+import History from "./components/History";
+>>>>>>> Stashed changes
 // Lazy-loaded components
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const SignUpPage = React.lazy(() => import("./pages/SignUpPage"));
@@ -143,7 +147,7 @@ const RouteConfig: React.FC = () => {
               <Route
                 path="all"
                 element={
-                  <Suspense fallback={<AllUsersShimmer/>}>
+                  <Suspense fallback={<AllUsersShimmer />}>
                     <AllUsers />
                   </Suspense>
                 }
@@ -156,7 +160,7 @@ const RouteConfig: React.FC = () => {
               <Route path="insurance" element={<div>Insurance</div>} />
             </Route>
             <Route path="/analytics" element={<div>Analytics</div>} />
-            <Route path="/history" element={<History/> }/>
+            <Route path="/history" element={<History />} />
             <Route path="/tickets" element={<Tickets />} />
             <Route
               path="/tickets"
@@ -167,8 +171,12 @@ const RouteConfig: React.FC = () => {
               }
             />
             <Route path="/notifications" element={<div>Notifications</div>} />
+<<<<<<< Updated upstream
             <Route path="/documents" element={<Documents/>} />
             <Route path="/doc-verification" element={<DocVerification/>}/>
+=======
+            <Route path="/documents" element={<h1>Documents</h1>} />
+>>>>>>> Stashed changes
             <Route path="/settings" element={<div>Settings</div>} />
           </Route>
         </Routes>

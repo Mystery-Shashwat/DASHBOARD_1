@@ -14,6 +14,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Download, ArrowLeft, ArrowRight } from "lucide-react";
 import jsPDF from "jspdf";
 import { toast } from "react-hot-toast";
+import { addMerchant } from "@/Redux/allMerchantsSlice";
 import PersonalDetailsShimmer from "../PersonalDetailsShimmer";
 const PersonalDetailsStep = React.lazy(() => import("./PersonalDetails"));
 const FinancialProfileStep = React.lazy(() => import("./FinancialProfile"));
@@ -242,6 +243,8 @@ const MerchantForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    
     if (currentStep === 3 && validateStep()) {
       try {
         console.log("Form submitted:", formData);
@@ -318,6 +321,8 @@ const MerchantForm = () => {
     pdf.save("merchant_application.pdf");
   };
 
+ 
+
   return (
     <div className="container mx-auto px-4 py-8 h-screen ">
       <div ref={formRef} className="max-h-full  pb-8">
@@ -370,7 +375,7 @@ const MerchantForm = () => {
               )}
               {currentStep === 3 && (
                 <div className="flex space-x-4">
-                  <Button type="submit">Submit Application</Button>
+                  <Button type="submit" onClick={() => {handleSubmit}}>Submit Application</Button>
                   <Button type="button" variant="outline" onClick={downloadPDF}>
                     <Download className="mr-2 h-4 w-4" /> Download PDF
                   </Button>

@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Table,
   TableBody,
@@ -8,13 +8,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { closeTicket } from "../Redux/ticketSlice"; // Adjust path to your slice
 
-// Define the Ticket interface (replace 'any' with proper types)
+// Define the Ticket interface (consistent with ticketSlice)
 interface Ticket {
   id: string;
   issue: string;
-  status?: string; // Optional since it was misspelled as 'staus' in your original
+  status?: string;
   createdAt: string;
+  [key: string]: any;
 }
 
 interface RootState {
@@ -23,6 +26,12 @@ interface RootState {
 
 const Tickets = () => {
   const totalTickets = useSelector((state: RootState) => state.ticket);
+  const dispatch = useDispatch();
+
+  const handleCloseTicket = (ticketId: string) => {
+    console.log("Close Ticket" + ticketId);
+    dispatch(closeTicket(ticketId));
+  };
 
   if (totalTickets.length === 0) {
     return (
@@ -49,6 +58,7 @@ const Tickets = () => {
             <TableHead>Issue</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Created At</TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -56,8 +66,17 @@ const Tickets = () => {
             <TableRow key={ticket.id}>
               <TableCell className="font-medium">{ticket.id}</TableCell>
               <TableCell>{ticket.issue}</TableCell>
-              <TableCell>{ticket.status}</TableCell>
+              <TableCell>{ticket.status || "Open"}</TableCell>
               <TableCell>{ticket.createdAt}</TableCell>
+              <TableCell>
+                <Button
+                  onClick={() => handleCloseTicket(ticket.id)}
+                  disabled={ticket.status === "closed"}
+                  variant={ticket.status === "closed" ? "secondary" : "default"}
+                >
+                  {ticket.status === "closed" ? "Closed" : "Close"}
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
