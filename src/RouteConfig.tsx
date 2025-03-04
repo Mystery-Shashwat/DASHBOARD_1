@@ -7,6 +7,8 @@ import RecentShimmer from "./components/RecentShimmer";
 import History from "./components/History";
 import AllUsersShimmer from "./components/AllUsersShimmer";
 import Documents from "./components/Documents";
+import UserSettingsPage from "./components/Usersetting";
+import AdminSettingsPage from "./components/AdminSettings";
 
 import DocVerification from "./components/DocVerification";
 // Lazy-loaded components
@@ -169,7 +171,8 @@ const RouteConfig: React.FC = () => {
             <Route path="/notifications" element={<div>Notifications</div>} />
             <Route path="/documents" element={<Documents/>} />
             <Route path="/doc-verification" element={<DocVerification/>}/>
-            <Route path="/settings" element={<div>Settings</div>} />
+            <Route path="/settings" element={<UserSettingsPage/>} />
+            <Route path="/setting" element={<AdminSettingsPage/>}/>
           </Route>
         </Routes>
       </Suspense>

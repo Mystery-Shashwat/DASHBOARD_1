@@ -177,7 +177,7 @@ export function Sidebar({ isOpen }: SidebarProps) {
     {
       icon: Settings,
       title: "Settings",
-      path: "/settings",
+      path: userRole === "admin" ? "/setting" : "/settings",
       roles: ["user", "admin"],
     },
   ];
