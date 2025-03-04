@@ -62,7 +62,7 @@ const Dashboard = () => {
     icon: React.ComponentType<{ className?: string }>;
   };
 
-  const MetricCard: React.FC<MetricCardProps> = ({ title, value, previousValue, growth, icon: Icon }) => (
+  const MetricCard: React.FC<MetricCardProps> = ({ title, value, growth, icon: Icon }) => (
     <Card className="flex-1">
       <CardContent className="pt-6">
         <div className="flex items-center justify-between">
