@@ -14,10 +14,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import themeReducer from "./themeSlice"; // Adjust path if needed
 import ticketReducer from "./ticketSlice"
+import merchantReducer from "./allMerchantsSlice"
 export const appStore = configureStore({
   reducer: {
     theme: themeReducer,
     ticket : ticketReducer,
+    merchant : merchantReducer
   },
 });
 

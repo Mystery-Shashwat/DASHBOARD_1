@@ -2,7 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Ticket {
   id: string;
-  [key: string]: any;
+  issue: string; 
+  status?: string; 
+  createdAt: string; 
+  [key: string]: any; 
 }
 
 const ticketSlice = createSlice({
@@ -12,10 +15,18 @@ const ticketSlice = createSlice({
     addTicket: (state, action: PayloadAction<Ticket>) => {
       state.push(action.payload);
       console.log("In ticket slice " + JSON.stringify(action.payload));
-      console.log("all tickets" + JSON.stringify(state))
+      console.log("all tickets" + JSON.stringify(state));
+    },
+    closeTicket: (state, action: PayloadAction<string>) => {
+      const ticketIndex = state.findIndex(
+        (ticket) => ticket.id === action.payload
+      );
+      if (ticketIndex !== -1) {
+        state[ticketIndex].status = "closed";
+      }
     },
   },
 });
 
-export const { addTicket } = ticketSlice.actions;
+export const { addTicket, closeTicket } = ticketSlice.actions;
 export default ticketSlice.reducer;
