@@ -147,12 +147,12 @@ export function Sidebar({ isOpen }: SidebarProps) {
       title: "Dashboard",
       path: "/dashboard",
       roles: ["user", "admin"],
-    // },
-    // {
-    //   icon: PieChart,
-    //   title: "Analytics",
-    //   path: "/analytics",
-    //   roles: ["user", "admin"],
+    },
+    {
+      icon: PieChart,
+      title: "Analytics",
+      path: "/analytics",
+      roles: ["user", "admin"],
     },
      
     { icon: Clock, title: "History", path: "/history", roles: ["admin"] },
