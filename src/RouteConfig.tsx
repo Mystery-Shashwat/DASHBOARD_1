@@ -14,6 +14,7 @@ import AdminSettingsPage from "./components/AdminSettings";
 import DocVerification from "./components/DocVerification";
 
 import History from "./components/History";
+import Notification from "./components/Notification";
 
 // Lazy-loaded components
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
@@ -25,7 +26,6 @@ const MerchantForm = React.lazy(
 );
 const AllUsers = React.lazy(() => import("./pages/AllUsers"));
 const Tickets = React.lazy(() => import("./pages/Tickets"));
-
 
 const RouteConfig: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
@@ -138,7 +138,7 @@ const RouteConfig: React.FC = () => {
                 element={
                   <Suspense fallback={<RecentShimmer />}>
                     {" "}
-                    <Recent />{" "}
+                    <Recent feature="transactions" />{" "}
                   </Suspense>
                 }
               />
@@ -172,11 +172,17 @@ const RouteConfig: React.FC = () => {
                 </Suspense>
               }
             />
-            <Route path="/notifications" element={<div>Notifications</div>} />
-            <Route path="/documents" element={<Documents/>} />
-            <Route path="/doc-verification" element={<DocVerification/>}/>
-            <Route path="/settings" element={<UserSettingsPage/>} />
-            <Route path="/setting" element={<AdminSettingsPage/>}/>
+            <Route
+              path="/notifications"
+              element={<Notification feature="notifications" />}
+            />
+            <Route
+              path="/documents"
+              element={<Documents feature="documents" />}
+            />
+            <Route path="/doc-verification" element={<DocVerification />} />
+            <Route path="/settings" element={<UserSettingsPage />} />
+            <Route path="/setting" element={<AdminSettingsPage />} />
           </Route>
         </Routes>
       </Suspense>

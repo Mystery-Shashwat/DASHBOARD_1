@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { Search, Filter, Plus, RefreshCw } from 'lucide-react';
-import { formatCurrency,formatDate,getStatusIcon } from './utils';
-
+import React, { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Search, Filter, Plus, RefreshCw } from "lucide-react";
+import { formatCurrency, formatDate, getStatusIcon } from "./utils";
 interface Transaction {
   id: string;
   date: string;
   amount: number;
   description: string;
   category: string;
-  status: 'pending' | 'completed' | 'failed';
+  status: "pending" | "completed" | "failed";
   account?: string;
   reference?: string;
 }
@@ -29,20 +41,26 @@ interface TransactionsTabProps {
 }
 
 const TransactionsTab: React.FC<TransactionsTabProps> = ({ document }) => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filterCategory, setFilterCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filterCategory, setFilterCategory] = useState<string>("all");
 
   const categories = document.transactions
-    .map(t => t.category)
+    .map((t) => t.category)
     .filter((value, index, self) => self.indexOf(value) === index);
 
-  const filteredTransactions = document.transactions.filter(transaction => {
-    const matchesSearch = searchQuery === '' ||
-      transaction.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  const filteredTransactions = document.transactions.filter((transaction) => {
+    const matchesSearch =
+      searchQuery === "" ||
+      transaction.description
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
       transaction.id.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = filterCategory === 'all' || transaction.category === filterCategory;
+    const matchesCategory =
+      filterCategory === "all" || transaction.category === filterCategory;
     return matchesSearch && matchesCategory;
   });
+
+  // console.log("Rendering TransactionsTab");
 
   return (
     <div className="px-6 py-4">
@@ -66,8 +84,12 @@ const TransactionsTab: React.FC<TransactionsTabProps> = ({ document }) => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Categories</SelectItem>
-              {categories.map(category => (
-                <SelectItem key={category} value={category} className="capitalize">
+              {categories.map((category) => (
+                <SelectItem
+                  key={category}
+                  value={category}
+                  className="capitalize"
+                >
                   {category}
                 </SelectItem>
               ))}
@@ -98,24 +120,36 @@ const TransactionsTab: React.FC<TransactionsTabProps> = ({ document }) => {
                 </TableCell>
               </TableRow>
             ) : (
-              filteredTransactions.map(transaction => (
+              filteredTransactions.map((transaction) => (
                 <TableRow key={transaction.id}>
                   <TableCell className="font-medium">
                     {transaction.description}
-                    <div className="text-xs text-gray-500">Ref: {transaction.reference}</div>
+                    <div className="text-xs text-gray-500">
+                      Ref: {transaction.reference}
+                    </div>
                   </TableCell>
                   <TableCell>{formatDate(transaction.date)}</TableCell>
                   <TableCell>
-                    <Badge variant="outline" className="capitalize">{transaction.category}</Badge>
+                    <Badge variant="outline" className="capitalize">
+                      {transaction.category}
+                    </Badge>
                   </TableCell>
                   <TableCell>{transaction.account}</TableCell>
-                  <TableCell className={`text-right font-medium ${transaction.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  <TableCell
+                    className={`text-right font-medium ${
+                      transaction.amount >= 0
+                        ? "text-green-600"
+                        : "text-red-600"
+                    }`}
+                  >
                     {formatCurrency(transaction.amount, document.currency)}
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-2">
                       {getStatusIcon(transaction.status)}
-                      <span className="capitalize text-sm">{transaction.status}</span>
+                      <span className="capitalize text-sm">
+                        {transaction.status}
+                      </span>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -125,7 +159,8 @@ const TransactionsTab: React.FC<TransactionsTabProps> = ({ document }) => {
         </Table>
         <div className="p-4 border-t flex items-center justify-between">
           <div className="text-sm text-gray-500">
-            Showing {filteredTransactions.length} of {document.transactions.length} transactions
+            Showing {filteredTransactions.length} of{" "}
+            {document.transactions.length} transactions
           </div>
           <Button variant="outline" size="sm">
             <Plus className="mr-1 h-4 w-4" />
