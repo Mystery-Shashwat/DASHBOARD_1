@@ -10,16 +10,17 @@
 // export type RootState = ReturnType<typeof store.getState>;
 // export type AppDispatch = typeof store.dispatch;
 
-
 import { configureStore } from "@reduxjs/toolkit";
 import themeReducer from "./themeSlice"; // Adjust path if needed
-import ticketReducer from "./ticketSlice"
-import merchantReducer from "./allMerchantsSlice"
+import ticketReducer from "./ticketSlice";
+import merchantReducer from "./allMerchantsSlice";
+import settingsReducer from "./settingSlice";
 export const appStore = configureStore({
   reducer: {
     theme: themeReducer,
-    ticket : ticketReducer,
-    merchant : merchantReducer
+    ticket: ticketReducer,
+    merchant: merchantReducer,
+    settings: settingsReducer,
   },
 });
 
