@@ -1,13 +1,24 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import AccessDenied from "./AccessDenied";
-const withFeatureToggle = (WrappedComponent) => {
-  return (props) => {
+
+interface Props {
+  feature: string;
+  [key: string]: any;
+}
+
+interface State {
+  settings: {
+    [key: string]: boolean;
+  };
+}
+
+const withFeatureToggle = (WrappedComponent: React.ComponentType<any>) => {
+  return (props: Props) => {
     const { feature, ...otherProps } = props;
     // console.log(props);
     const storedRole = localStorage.getItem("userRole");
     // console.log(storedRole);
-    const settings = useSelector((state) => state.settings);
+    const settings = useSelector((state: State) => state.settings);
     // console.log(settings);
     // console.log(feature);
     const isEnabled = settings[feature];
