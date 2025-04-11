@@ -152,7 +152,7 @@ export function Sidebar({ isOpen }: SidebarProps) {
       icon: PieChart,
       title: "Analytics",
       path: "/analytics",
-      roles: ["user", "admin"],
+      roles: ["user"],
     },
      
     { icon: Clock, title: "History", path: "/history", roles: ["admin"] },

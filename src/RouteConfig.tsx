@@ -15,6 +15,7 @@ import DocVerification from "./components/DocVerification";
 
 import History from "./components/History";
 import Notification from "./components/Notification";
+import Chatbot from "./pages/Analytics";
 
 // Lazy-loaded components
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
@@ -161,7 +162,7 @@ const RouteConfig: React.FC = () => {
               <Route path="loans" element={<div>Loans</div>} />
               <Route path="insurance" element={<div>Insurance</div>} />
             </Route>
-            <Route path="/analytics" element={<div>Analytics</div>} />
+            <Route path="/analytics" element={<Chatbot />} />
             <Route path="/history" element={<History />} />
             <Route path="/tickets" element={<Tickets />} />
             <Route
